@@ -1,8 +1,9 @@
 import React, { Component, Fragment } from "react";
 import "./App.css";
+import TrainSearch from "./components/TrainSearch/TrainSearch";
+import { getService } from "./helpers/apiCaller";
 
 class App extends Component {
-  
   state = {
     userPreferences: {
       daysOfTravel: [
@@ -34,6 +35,11 @@ class App extends Component {
     ]
   }
 
+  getTrains = async() => {
+    const res = await getService.station("bhi", "2018-06-07", "07:00", "eus");
+    console.log(res)  
+  }
+
   render() {
     return (
       <div className="App">
@@ -48,13 +54,11 @@ class App extends Component {
             </span>
           </h1>
         </header>
+        <TrainSearch></TrainSearch>
         <Fragment>
           {
-            this.state.journeys.map(
-            (journey) => (
-              <div> { journey.departure.time } </div>
-            ) 
-          )}
+            <button onClick={this.getTrains}>click me</button> 
+          }
         </Fragment>
       </div>
     );
