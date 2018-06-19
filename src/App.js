@@ -1,4 +1,5 @@
 import React, { Component, Fragment } from "react";
+import Grid from'@material-ui/core/Grid'
 import "./App.css";
 import TrainSearch from "./components/TrainSearch/TrainSearch";
 import { getService } from "./helpers/apiCaller";
@@ -15,6 +16,8 @@ class App extends Component {
         "saturday",
         "sunday"
       ],
+      currentTime: "",
+      currentDate: "",
       hoursOfTravel: {
         start: "0900",
         stop: "1900"
@@ -33,35 +36,47 @@ class App extends Component {
         status: "on time"
       }
     ]
-  }
+  };
 
-  getTrains = async() => {
+  
+  updateDate = e => {
+    const userPreferences = { ...this.state.userPreferences };
+    userPreferences.currentDate = e.target.value;
+    this.setState({ userPreferences });
+  };
+  updateTime = e => {
+    const userPreferences = { ...this.state.userPreferences };
+    userPreferences.currentTime = e.target.value;
+    this.setState({ userPreferences });
+  };
+
+  getTrains = async () => {
     const res = await getService.station("bhi", "2018-06-07", "07:00", "eus");
-    console.log(res)  
-  }
+    console.log(res);
+  };
 
   render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <h1 className="App-title">
-            Welcome to Train Pain...
-            <span role="img" aria-label="bumped head emoji">
-              &#x1F631;
-            </span>
-            <span role="img" aria-label="train emoji">
-              &#x1F686;
-            </span>
-          </h1>
-        </header>
-        <TrainSearch></TrainSearch>
+    return <Grid container className="App" justify="center">
+        <Grid item xs={12}>
+          <header className="App-header">
+            <h1 className="App-title">
+              Welcome to Train Buddy..
+              <span role="img" aria-label="bumped head emoji">
+                &#x1F631;
+              </span>
+              <span role="img" aria-label="train emoji">
+                &#x1F686;
+              </span>
+            </h1>
+          </header>
+        </Grid>
+        <Grid item xs={12}>
+          <TrainSearch updateStation={this.updateStation} updateDate={this.updateDate} updateTime={this.updateTime} />
+        </Grid>
         <Fragment>
-          {
-            <button onClick={this.getTrains}>click me</button> 
-          }
+          {<button onClick={this.getTrains}>click me</button>}
         </Fragment>
-      </div>
-    );
+      </Grid>;
   }
 }
 

@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { withStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
-import {Now} from '../../helpers/timeDate'
+import { Now } from "../../helpers/timeDate";
 
 const styles = theme => ({
   container: {
@@ -17,18 +17,27 @@ const styles = theme => ({
 });
 
 function DatePickers(props) {
-  const { classes, label } = props;
+  const { classes, label, updateDate } = props;
 
-  const todaysDate = Now.date('-')
-
-  return <form className={classes.container} noValidate>
-      <TextField id="date" label={label} type="date" defaultValue={todaysDate} className={classes.textField} InputLabelProps={{ shrink: true }} />
-    </form>;
+  return (
+    <form className={classes.container} noValidate>
+      <TextField
+        id="date"
+        label={label}
+        type="date"
+        defaultValue={Now.date("-")}
+        className={classes.textField}
+        InputLabelProps={{ shrink: true }}
+        onChange={(e) => updateDate(e)}
+      />
+    </form>
+  );
 }
 
 DatePickers.propTypes = {
   classes: PropTypes.object.isRequired,
-  label: PropTypes.string
+  label: PropTypes.string,
+  updateDate: PropTypes.func
 };
 
 export default withStyles(styles)(DatePickers);

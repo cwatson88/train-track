@@ -27,23 +27,13 @@ const Now = (() => {
   const date = (deliminater = "/") =>
     year + deliminater + month + deliminater + day;
 
-  const minutes = () => {
-    let mins = today.getUTCMinutes();
-    mins.toString().padStart(2, "0");
-    return mins;
-  };
+  const timeString = today.toLocaleTimeString("en-GB");
 
-  120 / 60 /*?*/
-  const hours = () => {
-    // this is universal time not local - GMT-1
-    let hrs = today
-      .getUTCHours()
-      .toString()
-      .padStart(2, "0");
-    return hrs;
-  };
-    const time = today.toLocaleTimeString('en-GB');
-//   (deliminater = ":") => hours() + deliminater + minutes();
+  // split turns the string to an array and will split on the deliminator ':'
+  // then you can use the array [hh,mm,ss]
+  const hours = timeString.split(":")[0];
+  const minutes = timeString.split(":")[1];
+  const time = hours + ":" + minutes; /*?*/
 
   return {
     day,
@@ -56,5 +46,4 @@ const Now = (() => {
   };
 })();
 
-Now.time; /*?*/
 export { Now };
