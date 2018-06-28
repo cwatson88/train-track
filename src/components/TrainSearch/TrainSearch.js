@@ -5,24 +5,25 @@ import TimePicker from "../Widgets/TimePicker";
 import StationFinder from "../Station/StationFinder";
 
 class TrainSearch extends Component {
-  componentDidUpdate() {
-    console.log("test");
-  }
   render() {
-    const { updateDate, updateTime } = this.props;
-    return (
-      <Grid container justify="center" alignItems="center" direction="row" >
-        <Grid item xs={4}>
-          <StationFinder label="findStation"/>
+    const align = {
+      paddingTop:'16px'
+    }
+    const { updateDate, updateTime, updateStation } = this.props;
+    return <Grid container justify="center" alignItems="flex-start" direction="row">
+        <Grid item>
+        I want to go from: <StationFinder label="Station" stationType="departureStation" updateStation={updateStation} />
         </Grid>
-        <Grid item xs={4}>
-          <DatePicker label="Train Date" updateDate={updateDate} />
+        <Grid item>
+        to: <StationFinder label="Station" stationType="destinationStation" updateStation={updateStation} />
         </Grid>
-        <Grid item xs={4}>
-          <TimePicker label="Train Time" updateTime={updateTime} />
+        <Grid item style={align}>
+          on: <DatePicker label="Train Date" updateDate={updateDate} />
         </Grid>
-      </Grid>
-    );
+        <Grid item style={align}>
+          at: <TimePicker label="Train Time" updateTime={updateTime} />
+        </Grid>
+      </Grid>;
   }
 }
 

@@ -1,0 +1,101 @@
+[debug] [2018-06-28T22:54:38.043Z] ----------------------------------------------------------------------
+[debug] [2018-06-28T22:54:38.046Z] Command:       /usr/local/Cellar/node/9.8.0/bin/node /usr/local/bin/firebase init
+[debug] [2018-06-28T22:54:38.046Z] CLI Version:   3.19.1
+[debug] [2018-06-28T22:54:38.046Z] Platform:      darwin
+[debug] [2018-06-28T22:54:38.046Z] Node Version:  v9.8.0
+[debug] [2018-06-28T22:54:38.047Z] Time:          Thu Jun 28 2018 23:54:38 GMT+0100 (BST)
+[debug] [2018-06-28T22:54:38.047Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-06-28T22:54:38.083Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase"]
+[debug] [2018-06-28T22:54:38.084Z] > authorizing via signed-in user
+[info] 
+     🔥🔥🔥🔥🔥🔥🔥🔥 🔥🔥🔥🔥 🔥🔥🔥🔥🔥🔥🔥🔥  🔥🔥🔥🔥🔥🔥🔥🔥 🔥🔥🔥🔥🔥🔥🔥🔥     🔥🔥🔥     🔥🔥🔥🔥🔥🔥  🔥🔥🔥🔥🔥🔥🔥🔥
+     🔥🔥        🔥🔥  🔥🔥     🔥🔥 🔥🔥       🔥🔥     🔥🔥  🔥🔥   🔥🔥  🔥🔥       🔥🔥
+     🔥🔥🔥🔥🔥🔥    🔥🔥  🔥🔥🔥🔥🔥🔥🔥🔥  🔥🔥🔥🔥🔥🔥   🔥🔥🔥🔥🔥🔥🔥🔥  🔥🔥🔥🔥🔥🔥🔥🔥🔥  🔥🔥🔥🔥🔥🔥  🔥🔥🔥🔥🔥🔥
+     🔥🔥        🔥🔥  🔥🔥    🔥🔥  🔥🔥       🔥🔥     🔥🔥 🔥🔥     🔥🔥       🔥🔥 🔥🔥
+     🔥🔥       🔥🔥🔥🔥 🔥🔥     🔥🔥 🔥🔥🔥🔥🔥🔥🔥🔥 🔥🔥🔥🔥🔥🔥🔥🔥  🔥🔥     🔥🔥  🔥🔥🔥🔥🔥🔥  🔥🔥🔥🔥🔥🔥🔥🔥
+
+You're about to initialize a Firebase project in this directory:
+
+  /Volumes/StoreOnMe/Dev/react-dev/train-pain
+
+Before we get started, keep in mind:
+
+  * You are currently outside your home directory
+
+[info] 
+=== Project Setup
+[info] 
+[info] First, let's associate this project directory with a Firebase project.
+[info] You can create multiple project aliases by running firebase use --add, 
+[info] but for now we'll just set up a default project.
+[info] 
+[debug] [2018-06-28T22:55:13.395Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2018-06-28T22:55:13.396Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ { refresh_token: '1/-risqg7skaEgUOjhXo5XumV8K1vwbNZDxGBQKD1EBcI',
+  client_id: '563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com',
+  client_secret: 'j9iVZfS8kkCEFUPaAeJV0sAi',
+  grant_type: 'refresh_token',
+  scope: 'email https://www.googleapis.com/auth/cloudplatformprojects.readonly https://www.googleapis.com/auth/firebase openid' } 
+ Thu Jun 28 2018 23:55:13 GMT+0100 (BST)
+[debug] [2018-06-28T22:55:13.552Z] <<< HTTP RESPONSE 200
+[debug] [2018-06-28T22:55:13.570Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects  
+  
+ Thu Jun 28 2018 23:55:13 GMT+0100 (BST)
+[debug] [2018-06-28T22:55:14.795Z] <<< HTTP RESPONSE 200
+[info] 
+=== Database Setup
+[info] 
+[info] Firebase Realtime Database Rules allow you to define how your data should be
+[info] structured and when your data can be read from and written to.
+[info] 
+[debug] [2018-06-28T22:57:38.851Z] >>> HTTP REQUEST GET https://main-train.firebaseio.com/.settings/rules.json  
+  
+ Thu Jun 28 2018 23:57:38 GMT+0100 (BST)
+[debug] [2018-06-28T22:57:39.535Z] <<< HTTP RESPONSE 200
+[info] ✔  Database Rules for main-train have been downloaded to database.rules.json.
+[info] Future modifications to database.rules.json will update Database Rules when you run
+[info] firebase deploy.
+[info] 
+=== Functions Setup
+[info] 
+[info] A functions directory will be created in your project with a Node.js
+[info] package pre-configured. Functions can be deployed with firebase deploy.
+[info] 
+[debug] [2018-06-28T22:57:39.539Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-06-28T22:57:39.541Z] > authorizing via signed-in user
+[debug] [2018-06-28T22:57:39.542Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2018-06-28T22:57:39.542Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+ { refresh_token: '1/-risqg7skaEgUOjhXo5XumV8K1vwbNZDxGBQKD1EBcI',
+  client_id: '563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com',
+  client_secret: 'j9iVZfS8kkCEFUPaAeJV0sAi',
+  grant_type: 'refresh_token',
+  scope: 'email https://www.googleapis.com/auth/cloud-platform https://www.googleapis.com/auth/cloudplatformprojects.readonly https://www.googleapis.com/auth/firebase openid' } 
+ Thu Jun 28 2018 23:57:39 GMT+0100 (BST)
+[debug] [2018-06-28T22:57:39.750Z] <<< HTTP RESPONSE 200
+[debug] [2018-06-28T22:57:39.764Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/main-train  
+  
+ Thu Jun 28 2018 23:57:39 GMT+0100 (BST)
+[debug] [2018-06-28T22:57:40.265Z] <<< HTTP RESPONSE 200
+[debug] [2018-06-28T22:57:40.266Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/main-train/tokens  
+  
+ Thu Jun 28 2018 23:57:40 GMT+0100 (BST)
+[debug] [2018-06-28T22:57:40.838Z] <<< HTTP RESPONSE 200
+[debug] [2018-06-28T22:57:40.842Z] >>> HTTP REQUEST PATCH https://servicemanagement.googleapis.com/v1/services/cloudfunctions.googleapis.com/projectSettings/main-train?updateMask=usageSettings  
+ { usageSettings: { consumerEnableStatus: 'ENABLED' } } 
+ Thu Jun 28 2018 23:57:40 GMT+0100 (BST)
+[debug] [2018-06-28T22:57:40.844Z] >>> HTTP REQUEST PATCH https://servicemanagement.googleapis.com/v1/services/runtimeconfig.googleapis.com/projectSettings/main-train?updateMask=usageSettings  
+ { usageSettings: { consumerEnableStatus: 'ENABLED' } } 
+ Thu Jun 28 2018 23:57:40 GMT+0100 (BST)
+[debug] [2018-06-28T22:57:42.750Z] <<< HTTP RESPONSE 200
+[debug] [2018-06-28T22:57:43.061Z] <<< HTTP RESPONSE 200
+[info] ✔  Wrote functions/package.json
+[info] ✔  Wrote functions/.eslintrc.json
+[info] ✔  Wrote functions/index.js
+[info] 
+=== Hosting Setup
+[info] 
+[info] Your public directory is the folder (relative to your project directory) that
+[info] will contain Hosting assets to be uploaded with firebase deploy. If you
+[info] have a build process for your assets, use your build's output directory.
+[info] 

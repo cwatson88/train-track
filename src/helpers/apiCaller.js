@@ -35,14 +35,32 @@ const getService = (() => {
       console.error(error);
     }
   };
+
+  const live = (stationCode, date, time, destination) => {
+    try {
+      const response = getData(
+        `${apiUrl}station/${stationCode}/live.json`,
+        {
+          calling_at: destination,
+          train_status: "passenger",
+          app_key: "b8cae571838e67407863f3ac6031f044",
+          app_id: "d026ddd3",
+          darwin: true
+        }
+      );
+      // optional param of operator
+      return response;
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  //https://transportapi.com/v3/uk/train/station/eus/live.json?app_id=d026ddd3&app_key=b8cae571838e67407863f3ac6031f044&calling_at=bhi&darwin=true&operator=vt&train_status=passenger
   //   const stationLive = `${apiUrl}station/${stationCode}/live.json`;
   //   const train = ` ${apiUrl}service/${service}/${date}/${time}/timetable.json`;
 
-  return {
-    station
+  return { station, live };
     // stationLive,
     // train
-  };
 })();
 
 export {getService}

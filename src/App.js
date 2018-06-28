@@ -1,8 +1,10 @@
-import React, { Component, Fragment } from "react";
-import Grid from'@material-ui/core/Grid'
+import React, { Component } from "react";
+import Grid from "@material-ui/core/Grid";
 import "./App.css";
 import TrainSearch from "./components/TrainSearch/TrainSearch";
 import { getService } from "./helpers/apiCaller";
+import { Now } from "./helpers/timeDate";
+import Timetable from "./components/Timetable/Timetable";
 
 class App extends Component {
   state = {
@@ -23,40 +25,77 @@ class App extends Component {
         stop: "1900"
       }
     },
-    journeys: [
-      {
-        departure: {
-          station: "London Euston",
-          time: "17:30"
-        },
-        arrival: {
-          station: "Birmingham International",
-          time: "18:45"
-        },
-        status: "on time"
-      }
-    ]
+    journey: {
+      departureStation: "",
+      destinationStation: "",
+      time: "",
+      date: ""
+    },
+    journeyTimetable: [],
+    currentJourney: ""
   };
 
-  
+  componentDidMount = () => {
+    const journey = { ...this.state.journey };
+    journey.time = Now.time;
+    journey.date = Now.date("-");
+    this.setState({ journey });
+  };
+
+  componentDidUpdate = (prevProps, prevState) => {
+    if(prevState.journey !== this.state.journey){
+      this.getTrains();
+    }
+  };
+
   updateDate = e => {
-    const userPreferences = { ...this.state.userPreferences };
-    userPreferences.currentDate = e.target.value;
-    this.setState({ userPreferences });
+    const journey = { ...this.state.journey };
+    journey.date = e.target.value;
+    this.setState({ journey });
   };
   updateTime = e => {
-    const userPreferences = { ...this.state.userPreferences };
-    userPreferences.currentTime = e.target.value;
-    this.setState({ userPreferences });
+    const journey = { ...this.state.journey };
+    journey.time = e.target.value;
+    this.setState({ journey });
+  };
+  updateStation = (stationType, stationDetails) => {
+    const journey = { ...this.state.journey };
+    journey[stationType] = stationDetails;
+    this.setState({ journey });
   };
 
   getTrains = async () => {
-    const res = await getService.station("bhi", "2018-06-07", "07:00", "eus");
-    console.log(res);
+    const {
+      date,
+      departureStation,
+      destinationStation,
+      time
+    } = this.state.journey;
+    if (date && departureStation && destinationStation && time) {
+      // reset departureStation to equal the CRS Code
+      // console.log(departureStation);
+      const departureStationCRS = departureStation.stationCRS;
+      const destinationStationCRS = destinationStation.stationCRS;
+
+      // console.log(getService.station(departureStationCRS, date, time, destinationStationCRS))
+
+      const currentJourney 
+      = await getService.live(
+        departureStationCRS,
+        date,
+        time,
+        destinationStationCRS
+      );
+      await this.setState({ currentJourney });
+      // getService.station("bhi", "2018-06-07", "07:00", "eus")
+    } else {
+      console.log("items arent all updated yet");
+    }
   };
 
   render() {
-    return <Grid container className="App" justify="center">
+    return (
+      <Grid container className="App" justify="center">
         <Grid item xs={12}>
           <header className="App-header">
             <h1 className="App-title">
@@ -71,12 +110,17 @@ class App extends Component {
           </header>
         </Grid>
         <Grid item xs={12}>
-          <TrainSearch updateStation={this.updateStation} updateDate={this.updateDate} updateTime={this.updateTime} />
+          <TrainSearch
+            updateStation={this.updateStation}
+            updateDate={this.updateDate}
+            updateTime={this.updateTime}
+          />
         </Grid>
-        <Fragment>
-          {<button onClick={this.getTrains}>click me</button>}
-        </Fragment>
-      </Grid>;
+        <Grid>
+          <Timetable journeyTimetable={this.state.currentJourney} />
+        </Grid>
+      </Grid>
+    );
   }
 }
 
