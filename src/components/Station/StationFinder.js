@@ -4,7 +4,6 @@ import PropTypes from "prop-types";
 import TextField from "@material-ui/core/TextField";
 import crsCodes from "../../crsCode";
 import { List, ListItem } from "@material-ui/core";
-import { Z_DEFAULT_STRATEGY } from "zlib";
 
 class StationFinder extends Component {
   state = {
@@ -91,6 +90,7 @@ class StationFinder extends Component {
             margin="normal"
             onChange={this.findStation}
             value={searchBoxValue}
+            autoComplete="off"
           />
           <div
             style={{

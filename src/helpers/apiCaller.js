@@ -63,4 +63,7 @@ const getService = (() => {
     // train
 })();
 
-export {getService}
+
+// a better api, full info at https://huxley.apphb.com/
+//huxley.apphb.com/all/bhi/from/rugby/20?accessToken=de3373f2-54fc-4e1a-9ffc-ebc14108b1a3
+https: export { getService };

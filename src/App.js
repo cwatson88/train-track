@@ -43,7 +43,7 @@ class App extends Component {
   };
 
   componentDidUpdate = (prevProps, prevState) => {
-    if(prevState.journey !== this.state.journey){
+    if (prevState.journey !== this.state.journey) {
       this.getTrains();
     }
   };
@@ -79,8 +79,7 @@ class App extends Component {
 
       // console.log(getService.station(departureStationCRS, date, time, destinationStationCRS))
 
-      const currentJourney 
-      = await getService.live(
+      const currentJourney = await getService.live(
         departureStationCRS,
         date,
         time,
@@ -99,25 +98,23 @@ class App extends Component {
         <Grid item xs={12}>
           <header className="App-header">
             <h1 className="App-title">
-              Welcome to Train Buddy..
-              <span role="img" aria-label="bumped head emoji">
-                &#x1F631;
-              </span>
+              ===Main Train===
+              <br />
               <span role="img" aria-label="train emoji">
                 &#x1F686;
               </span>
             </h1>
           </header>
         </Grid>
-        <Grid item xs={12}>
+        <Grid item xs={12} style={{ marginTop: "50px" }}>
           <TrainSearch
             updateStation={this.updateStation}
             updateDate={this.updateDate}
             updateTime={this.updateTime}
           />
         </Grid>
-        <Grid>
-          <Timetable journeyTimetable={this.state.currentJourney} />
+        <Grid item xs={12}>
+            <Timetable key={123} journeyTimetable={this.state.currentJourney} />
         </Grid>
       </Grid>
     );
