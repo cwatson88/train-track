@@ -38,16 +38,13 @@ const getService = (() => {
 
   const live = (stationCode, date, time, destination) => {
     try {
-      const response = getData(
-        `${apiUrl}station/${stationCode}/live.json`,
-        {
-          calling_at: destination,
-          train_status: "passenger",
-          app_key: "b8cae571838e67407863f3ac6031f044",
-          app_id: "d026ddd3",
-          darwin: true
-        }
-      );
+      const response = getData(`${apiUrl}station/${stationCode}/live.json`, {
+        calling_at: destination,
+        train_status: "passenger",
+        app_key: "b8cae571838e67407863f3ac6031f044",
+        app_id: "d026ddd3",
+        darwin: true
+      });
       // optional param of operator
       return response;
     } catch (error) {
@@ -59,11 +56,21 @@ const getService = (() => {
   //   const train = ` ${apiUrl}service/${service}/${date}/${time}/timetable.json`;
 
   return { station, live };
-    // stationLive,
-    // train
+  // stationLive,
+  // train
 })();
-
 
 // a better api, full info at https://huxley.apphb.com/
 //huxley.apphb.com/all/bhi/from/rugby/20?accessToken=de3373f2-54fc-4e1a-9ffc-ebc14108b1a3
-https: export { getService };
+
+const getTrainServices = async (to, from) => {
+  const accessToken = "accessToken=de3373f2-54fc-4e1a-9ffc-ebc14108b1a3";
+  const apiUrl = `https://huxley.apphb.com/departures/${from}/to/${to}?${accessToken}`;
+  try {
+    const response = await axios.get(apiUrl);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+export { getService, getTrainServices };

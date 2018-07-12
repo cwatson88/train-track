@@ -1,15 +1,14 @@
-import React from "react";
+import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import { Grid } from "@material-ui/core";
-import { CSSTransition } from "react-transition-group";
 
 const Timetable = props => {
   const { journeyTimetable } = props;
 
   console.log(journeyTimetable);
 
-  const stripes = { backgroundColor: "grey" };
-  const styles2 = { backgroundColor: "yellow" };
+  const stripes = { backgroundColor: "#ccd8a8" };
+  // const styles2 = { backgroundColor: "yellow" };
   const timeTableRows = { paddingTop: "20px" };
 
   return (
@@ -41,35 +40,41 @@ const Timetable = props => {
         </Grid>
       </Grid>
       {journeyTimetable &&
-        journeyTimetable.departures.all.map((journey, index) => {
+        journeyTimetable.map((journey, index) => {
           const striped = index % 2 === 0 ? stripes : null;
-          return <CSSTransition transitionName="example" transitionEnterTimeout={500} transitionLeaveTimeout={300} timeout={300}>
-              <Grid container justify="center" key={journey.train_uid} style={{ ...timeTableRows, ...striped }}>
-                <Grid item xs={3} style={{ ...stripes, ...styles2 }}>
-                  {" "}
-                  {journey.expected_departure_time}
+          return (
+            <Fragment key={journey.serviceID}>
+                <Grid
+                  container
+                  justify="center"
+                  style={{ ...timeTableRows, ...striped }}
+                >
+                  <Grid item xs={3}>
+                    {" "}
+                    {journey.std}
+                  </Grid>
+                  <Grid item xs={3}>
+                    {" "}
+                    {journey.origin.name}
+                  </Grid>
+                  <Grid item xs={3}>
+                    {" "}
+                    {journey.platform}
+                  </Grid>
+                  <Grid item xs={3}>
+                    {" "}
+                    {journey.etd}
+                  </Grid>
                 </Grid>
-                <Grid item xs={3}>
-                  {" "}
-                  {journey.origin_name}
-                </Grid>
-                <Grid item xs={3}>
-                  {" "}
-                  {journey.platform}
-                </Grid>
-                <Grid item xs={3}>
-                  {" "}
-                  {journey.status}
-                </Grid>
-              </Grid>
-            </CSSTransition>;
+            </Fragment>
+          );
         })}
     </Grid>
   );
 };
 
 Timetable.propTypes = {
-  journeyTimetable: PropTypes.object
+  journeyTimetable: PropTypes.array
 };
 
 export default Timetable;

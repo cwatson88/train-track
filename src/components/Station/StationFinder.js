@@ -17,7 +17,7 @@ class StationFinder extends Component {
    * when found they are then put into an array of stations
    */
   findStation = e => {
-    this.setState({stationFound:false})
+    this.setState({ stationFound: false });
     const searchString = e.target.value;
     const stationSearch = crsCodes.filter(item => {
       const currentCrs = item["CRS Code"].toUpperCase();
@@ -37,10 +37,8 @@ class StationFinder extends Component {
    * Set the top level state of the station (updateStation)
    */
   setStation = (e, stationCRS, stationName) => {
-    const { stationType, updateStation } = this.props
-    updateStation(stationType,
-      {stationName,stationCRS}
-    );
+    const { stationType, updateStation } = this.props;
+    updateStation(stationType, { stationName, stationCRS });
     this.setState({
       searchBoxValue: stationName,
       stations: [],
@@ -55,13 +53,10 @@ class StationFinder extends Component {
   getStationList = () => {
     if (this.state.stations.length > 0) {
       return this.state.stations.map(station => (
-        <ListItem key={station["CRS Code"]}
+        <ListItem
+          key={station["CRS Code"]}
           onClick={e =>
-            this.setStation(
-              e,
-              station["CRS Code"],
-              station["Station Name"]
-            )
+            this.setStation(e, station["CRS Code"], station["Station Name"])
           }
         >
           {station["CRS Code"]}-
@@ -75,7 +70,7 @@ class StationFinder extends Component {
   handleSubmit(e) {
     e.preventDefault();
   }
-  
+
   render() {
     const { searchBoxValue } = this.state;
     const { label } = this.props;
@@ -100,8 +95,9 @@ class StationFinder extends Component {
               width: "300px"
             }}
           >
-          {/* if there is something in the box and therea */}
-           { this.state.searchBoxValue.length > 0 && !this.state.stationFound && <List>{this.getStationList()}</List>} 
+            {/* if there is something in the box and therea */}
+            {this.state.searchBoxValue.length > 0 &&
+              !this.state.stationFound && <List>{this.getStationList()}</List>}
           </div>
         </form>
       </Fragment>

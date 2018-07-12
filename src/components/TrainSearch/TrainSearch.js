@@ -1,8 +1,9 @@
 import { Component, default as React } from "react";
-import Grid from "@material-ui/core/Grid";
+import { Grid, Switch } from "@material-ui/core";
 import DatePicker from "../Widgets/DatePicker";
 import TimePicker from "../Widgets/TimePicker";
 import StationFinder from "../Station/StationFinder";
+// import { DirectionsRailway } from "@material-ui/icons";
 
 class TrainSearch extends Component {
   render() {
@@ -33,7 +34,11 @@ class TrainSearch extends Component {
             updateStation={updateStation}
           />
         </Grid>
-        <Grid item style={align}>
+        <Grid>
+          LIVE
+          {/* <DirectionsRailway /> */}
+        </Grid>
+        {/* <Grid item style={align}>
           <span>
             <i>on:</i>
           </span>{" "}
@@ -44,7 +49,7 @@ class TrainSearch extends Component {
             <i>at:</i>
           </span>{" "}
           <TimePicker label="Train Time" updateTime={updateTime} />
-        </Grid>
+        </Grid> */}
       </Grid>
     );
   }

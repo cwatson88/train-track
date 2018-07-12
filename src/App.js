@@ -2,9 +2,11 @@ import React, { Component } from "react";
 import Grid from "@material-ui/core/Grid";
 import "./App.css";
 import TrainSearch from "./components/TrainSearch/TrainSearch";
-import { getService } from "./helpers/apiCaller";
+import { getTrainServices } from "./helpers/apiCaller";
 import { Now } from "./helpers/timeDate";
 import Timetable from "./components/Timetable/Timetable";
+import ServiceAlerts from "./components/ServiceAlerts/ServiceAlerts";
+import TrainCompany from "./components/Filters/TrainCompany";
 
 class App extends Component {
   state = {
@@ -32,7 +34,11 @@ class App extends Component {
       date: ""
     },
     journeyTimetable: [],
-    currentJourney: ""
+    currentJourney: [],
+    serviceAlerts: [],
+    animate: "example-enter",
+    visible: false,
+    trainCompany: {}
   };
 
   componentDidMount = () => {
@@ -40,6 +46,7 @@ class App extends Component {
     journey.time = Now.time;
     journey.date = Now.date("-");
     this.setState({ journey });
+    console.log("mounted");
   };
 
   componentDidUpdate = (prevProps, prevState) => {
@@ -71,25 +78,35 @@ class App extends Component {
       destinationStation,
       time
     } = this.state.journey;
-    if (date && departureStation && destinationStation && time) {
+
+    if (departureStation && destinationStation) {
       // reset departureStation to equal the CRS Code
-      // console.log(departureStation);
       const departureStationCRS = departureStation.stationCRS;
       const destinationStationCRS = destinationStation.stationCRS;
 
-      // console.log(getService.station(departureStationCRS, date, time, destinationStationCRS))
-
-      const currentJourney = await getService.live(
-        departureStationCRS,
-        date,
-        time,
-        destinationStationCRS
+      const result = await getTrainServices(
+        destinationStationCRS,
+        departureStationCRS
       );
-      await this.setState({ currentJourney });
-      // getService.station("bhi", "2018-06-07", "07:00", "eus")
+      const currentJourney = await result.trainServices;
+      const serviceAlerts = await result.nrccMessages;
+      await this.setState({ currentJourney, serviceAlerts });
     } else {
       console.log("items arent all updated yet");
     }
+  };
+  updateTrainCompany(trainCompany) {
+    console.log(trainCompany);
+    this.setState({ trainCompany });
+    // this.state.currentJourney.flter(
+    //   service => service.operatorCode === trainCompany.ATOC
+    // );
+  }
+  addRemoveClasses = () => {
+    const animate = !this.state.visible
+      ? "example-enter-active"
+      : "example-enter";
+    this.setState({ animate, visible: !this.state.visible });
   };
 
   render() {
@@ -100,13 +117,19 @@ class App extends Component {
             <h1 className="App-title">
               ===Main Train===
               <br />
-              <span role="img" aria-label="train emoji">
+              <span
+                onClick={this.addRemoveClasses}
+                className={this.state.animate}
+                role="img"
+                aria-label="train emoji"
+              >
                 &#x1F686;
               </span>
             </h1>
           </header>
         </Grid>
         <Grid item xs={12} style={{ marginTop: "50px" }}>
+          <ServiceAlerts serviceAlerts={this.state.serviceAlerts} />
           <TrainSearch
             updateStation={this.updateStation}
             updateDate={this.updateDate}
@@ -114,7 +137,8 @@ class App extends Component {
           />
         </Grid>
         <Grid item xs={12}>
-            <Timetable key={123} journeyTimetable={this.state.currentJourney} />
+          <TrainCompany updateTrainCompany={this.updateTrainCompany} />
+          <Timetable journeyTimetable={this.state.currentJourney} />
         </Grid>
       </Grid>
     );
