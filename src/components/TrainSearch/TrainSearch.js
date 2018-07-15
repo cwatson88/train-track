@@ -34,10 +34,6 @@ class TrainSearch extends Component {
             updateStation={updateStation}
           />
         </Grid>
-        <Grid>
-          LIVE
-          {/* <DirectionsRailway /> */}
-        </Grid>
         {/* <Grid item style={align}>
           <span>
             <i>on:</i>

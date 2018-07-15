@@ -2,11 +2,17 @@ import React, { Component } from "react";
 import Grid from "@material-ui/core/Grid";
 import "./App.css";
 import TrainSearch from "./components/TrainSearch/TrainSearch";
-import { getTrainServices } from "./helpers/apiCaller";
-import { Now } from "./helpers/timeDate";
+import {
+  getTrainServices,
+  getQuickestTrainServices
+} from "./helpers/apiCaller";
+// import { Now } from "./helpers/timeDate";
 import Timetable from "./components/Timetable/Timetable";
 import ServiceAlerts from "./components/ServiceAlerts/ServiceAlerts";
-import TrainCompany from "./components/Filters/TrainCompany";
+import FastestJourney from "./components/Filters/FastestJourney";
+import VirginTrains from "./components/Filters/VirginTrains";
+import Refresh from "./components/Refresh";
+import { WifiTethering } from "@material-ui/icons";
 
 class App extends Component {
   state = {
@@ -38,15 +44,11 @@ class App extends Component {
     serviceAlerts: [],
     animate: "example-enter",
     visible: false,
-    trainCompany: {}
-  };
-
-  componentDidMount = () => {
-    const journey = { ...this.state.journey };
-    journey.time = Now.time;
-    journey.date = Now.date("-");
-    this.setState({ journey });
-    console.log("mounted");
+    quickestJourney: false,
+    quickestJourneyDisabled: true,
+    virginTrains: true,
+    virginTrainsDisabled: false,
+    refreshRate: "manual"
   };
 
   componentDidUpdate = (prevProps, prevState) => {
@@ -84,31 +86,54 @@ class App extends Component {
       const departureStationCRS = departureStation.stationCRS;
       const destinationStationCRS = destinationStation.stationCRS;
 
-      const result = await getTrainServices(
-        destinationStationCRS,
-        departureStationCRS
-      );
+      const apiCallForTrains = async () =>
+        (await this.state.quickestJourney)
+          ? await getQuickestTrainServices(
+              destinationStationCRS,
+              departureStationCRS
+            )
+          : await getTrainServices(destinationStationCRS, departureStationCRS);
+
+      const result = await apiCallForTrains();
       const currentJourney = await result.trainServices;
+      // this.state.quickestJourney
+      //   ? await result.departures
+      //   : await result.trainServices;
       const serviceAlerts = await result.nrccMessages;
+
       await this.setState({ currentJourney, serviceAlerts });
     } else {
       console.log("items arent all updated yet");
     }
   };
-  updateTrainCompany(trainCompany) {
-    console.log(trainCompany);
-    this.setState({ trainCompany });
-    // this.state.currentJourney.flter(
-    //   service => service.operatorCode === trainCompany.ATOC
-    // );
-  }
+
   addRemoveClasses = () => {
     const animate = !this.state.visible
       ? "example-enter-active"
       : "example-enter";
     this.setState({ animate, visible: !this.state.visible });
   };
+  setQuickestJourney = value => {
+    this.setState({ quickestJourney: value });
+  };
+  getVirginTrains = value => {
+    this.setState({ virginTrains: value });
+  };
+  changeRefreshRate = refresh => {
+    this.setState({ refreshRate: refresh });
+    this.refreshData();
+  };
+  refreshData = () => {
+    if (this.state.refreshRate !== "manual") {
+      clearInterval();
 
+      setInterval(() => {
+        this.getTrains();
+      }, this.state.refreshRate);
+    } else {
+      this.getTrains();
+    }
+  };
   render() {
     return (
       <Grid container className="App" justify="center">
@@ -137,8 +162,29 @@ class App extends Component {
           />
         </Grid>
         <Grid item xs={12}>
-          <TrainCompany updateTrainCompany={this.updateTrainCompany} />
-          <Timetable journeyTimetable={this.state.currentJourney} />
+          <VirginTrains
+            virginTrains={this.state.virginTrains}
+            getVirginTrains={this.getVirginTrains}
+            disabled={this.state.virginTrainsDisabled}
+          />
+
+          <FastestJourney
+            quickestJourney={this.state.quickestJourney}
+            setQuickestJourney={this.setQuickestJourney}
+            disabled={this.state.fastestJourneyDisabled}
+          />
+          <Refresh
+            refreshRate={this.state.refreshRate}
+            changeRefreshRate={this.changeRefreshRate}
+          />
+          <div onClick={this.refreshTrains}>
+            <WifiTethering className="live" />Live
+          </div>
+
+          <Timetable
+            journeyTimetable={this.state.currentJourney}
+            virginTrains={this.state.virginTrains}
+          />
         </Grid>
       </Grid>
     );

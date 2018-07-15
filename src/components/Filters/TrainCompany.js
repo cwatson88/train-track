@@ -6,7 +6,6 @@ import { FormControl, InputLabel, Select, MenuItem } from "@material-ui/core";
 const TrainCompany = props => {
   const { trainCompany, updateTrainCompany } = props;
   const setTrainCompany = train => e => {
-    console.log(train, e);
     const TrainProvider = { company: e, ATOC: train };
     updateTrainCompany(TrainProvider);
   };
