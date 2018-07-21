@@ -1,7 +1,5 @@
+import { Grid } from "@material-ui/core";
 import { Component, default as React } from "react";
-import { Grid, Switch } from "@material-ui/core";
-import DatePicker from "../Widgets/DatePicker";
-import TimePicker from "../Widgets/TimePicker";
 import StationFinder from "../Station/StationFinder";
 // import { DirectionsRailway } from "@material-ui/icons";
 
@@ -10,7 +8,7 @@ class TrainSearch extends Component {
     const align = {
       paddingTop: "16px"
     };
-    const { updateDate, updateTime, updateStation } = this.props;
+    const { updateStation } = this.props;
     return (
       <Grid container justify="center" alignItems="flex-start" direction="row">
         <Grid item>

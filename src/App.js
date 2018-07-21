@@ -1,18 +1,17 @@
-import React, { Component } from "react";
 import Grid from "@material-ui/core/Grid";
+import { WifiTethering } from "@material-ui/icons";
+import React, { Component } from "react";
 import "./App.css";
-import TrainSearch from "./components/TrainSearch/TrainSearch";
-import {
-  getTrainServices,
-  getQuickestTrainServices
-} from "./helpers/apiCaller";
-// import { Now } from "./helpers/timeDate";
-import Timetable from "./components/Timetable/Timetable";
-import ServiceAlerts from "./components/ServiceAlerts/ServiceAlerts";
 import FastestJourney from "./components/Filters/FastestJourney";
 import VirginTrains from "./components/Filters/VirginTrains";
 import Refresh from "./components/Refresh";
-import { WifiTethering } from "@material-ui/icons";
+import ServiceAlerts from "./components/ServiceAlerts/ServiceAlerts";
+import Timetable from "./components/Timetable/Timetable";
+import TrainSearch from "./components/TrainSearch/TrainSearch";
+import {
+  getQuickestTrainServices,
+  getTrainServices
+} from "./helpers/apiCaller";
 
 class App extends Component {
   state = {
@@ -51,6 +50,21 @@ class App extends Component {
     refreshRate: "manual"
   };
 
+  componentDidMount() {
+    Notification.requestPermission().then(function(result) {
+      if (result === "denied") {
+        console.log("Permission wasn't granted. Allow a retry.");
+        return;
+      }
+      if (result === "default") {
+        console.log("The permission request was dismissed.");
+        return;
+      }
+      // Do something with the granted permission.
+    });
+
+    this.pushNotification();
+  }
   componentDidUpdate = (prevProps, prevState) => {
     if (prevState.journey !== this.state.journey) {
       this.getTrains();
@@ -74,12 +88,7 @@ class App extends Component {
   };
 
   getTrains = async () => {
-    const {
-      date,
-      departureStation,
-      destinationStation,
-      time
-    } = this.state.journey;
+    const { departureStation, destinationStation } = this.state.journey;
 
     if (departureStation && destinationStation) {
       // reset departureStation to equal the CRS Code
@@ -132,6 +141,31 @@ class App extends Component {
       }, this.state.refreshRate);
     } else {
       this.getTrains();
+    }
+  };
+
+  pushNotification = message => {
+    if (!("Notification" in window)) {
+      console.log("This browser does not support desktop notification");
+    }
+
+    // Let's check whether notification permissions have alredy been granted
+    else if (Notification.permission === "granted") {
+      // If it's okay let's create a notification
+      new Notification("Hi there!").vibrate;
+    }
+
+    // Otherwise, we need to ask the user for permission
+    else if (
+      Notification.permission !== "denied" ||
+      Notification.permission === "default"
+    ) {
+      Notification.requestPermission(function(permission) {
+        // If the user accepts, let's create a notification
+        if (permission === "granted") {
+          new Notification("Hi there!").vibrate;
+        }
+      });
     }
   };
   render() {
