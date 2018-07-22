@@ -12,6 +12,7 @@ import {
   getQuickestTrainServices,
   getTrainServices
 } from "./helpers/apiCaller";
+import messaging from "./helpers/firebaseMessaging";
 
 class App extends Component {
   state = {
@@ -51,19 +52,6 @@ class App extends Component {
   };
 
   componentDidMount() {
-    Notification.requestPermission().then(function(result) {
-      if (result === "denied") {
-        console.log("Permission wasn't granted. Allow a retry.");
-        return;
-      }
-      if (result === "default") {
-        console.log("The permission request was dismissed.");
-        return;
-      }
-      // Do something with the granted permission.
-    });
-
-    this.pushNotification();
   }
   componentDidUpdate = (prevProps, prevState) => {
     if (prevState.journey !== this.state.journey) {
@@ -144,30 +132,6 @@ class App extends Component {
     }
   };
 
-  pushNotification = message => {
-    if (!("Notification" in window)) {
-      console.log("This browser does not support desktop notification");
-    }
-
-    // Let's check whether notification permissions have alredy been granted
-    else if (Notification.permission === "granted") {
-      // If it's okay let's create a notification
-      new Notification("Hi there!").vibrate;
-    }
-
-    // Otherwise, we need to ask the user for permission
-    else if (
-      Notification.permission !== "denied" ||
-      Notification.permission === "default"
-    ) {
-      Notification.requestPermission(function(permission) {
-        // If the user accepts, let's create a notification
-        if (permission === "granted") {
-          new Notification("Hi there!").vibrate;
-        }
-      });
-    }
-  };
   render() {
     return (
       <Grid container className="App" justify="center">

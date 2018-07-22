@@ -17,6 +17,8 @@ class StationFinder extends Component {
    * when found they are then put into an array of stations
    */
   findStation = e => {
+    window.navigator.vibrate(200);
+
     this.setState({ stationFound: false });
     const searchString = e.target.value;
     const stationSearch = crsCodes.filter(item => {
