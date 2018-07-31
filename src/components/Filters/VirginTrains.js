@@ -10,7 +10,7 @@ const VirginTrains = props => {
         checked={virginTrains}
         onClick={e => getVirginTrains(!virginTrains)}
         value="getVirginTrains"
-        color="primary"
+        color="secondary"
         disabled={disabled}
       />
       <span>only Virgin trains</span>

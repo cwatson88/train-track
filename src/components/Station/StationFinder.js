@@ -1,9 +1,29 @@
 import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
-
+import styled from "styled-components";
 import TextField from "@material-ui/core/TextField";
 import crsCodes from "../../crsCode";
 import { List, ListItem } from "@material-ui/core";
+
+const StyledTextField = styled(TextField)`
+  && {
+    color: white;
+    && label {
+      color: white;
+      font-weight: 100;
+    }
+    && input {
+      color: white;
+    }
+  }
+`;
+
+const StyledListItem = styled(ListItem)`
+  && {
+    background-color: #0b3a56;
+    border-bottom: 1px solid #00000040;
+  }
+`;
 
 class StationFinder extends Component {
   state = {
@@ -55,7 +75,7 @@ class StationFinder extends Component {
   getStationList = () => {
     if (this.state.stations.length > 0) {
       return this.state.stations.map(station => (
-        <ListItem
+        <StyledListItem
           key={station["CRS Code"]}
           onClick={e =>
             this.setStation(e, station["CRS Code"], station["Station Name"])
@@ -63,7 +83,7 @@ class StationFinder extends Component {
         >
           {station["CRS Code"]}-
           {station["Station Name"]}
-        </ListItem>
+        </StyledListItem>
       ));
     } else {
       return "No Stations Found";
@@ -79,8 +99,7 @@ class StationFinder extends Component {
     return (
       <Fragment>
         <form onSubmit={this.handleSubmit}>
-          <TextField
-            style={{ width: "300px" }}
+          <StyledTextField
             id="with-placeholder"
             label={label}
             type="search"
@@ -88,13 +107,12 @@ class StationFinder extends Component {
             onChange={this.findStation}
             value={searchBoxValue}
             autoComplete="off"
+            fullWidth={true}
           />
           <div
             style={{
               maxHeight: "180px",
-              overflow: "scroll",
-              backgroundColor: "#eaeaea",
-              width: "300px"
+              overflow: "scroll"
             }}
           >
             {/* if there is something in the box and therea */}

@@ -1,19 +1,27 @@
-import Grid from "@material-ui/core/Grid";
-import { WifiTethering } from "@material-ui/icons";
 import React, { Component } from "react";
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import styled from "styled-components";
+import Grid from "@material-ui/core/Grid";
 import "./App.css";
-import FastestJourney from "./components/Filters/FastestJourney";
-import VirginTrains from "./components/Filters/VirginTrains";
-import Refresh from "./components/Refresh";
-import ServiceAlerts from "./components/ServiceAlerts/ServiceAlerts";
-import Timetable from "./components/Timetable/Timetable";
-import TrainSearch from "./components/TrainSearch/TrainSearch";
+import Header from "./assets/Header.svg";
 import {
   getQuickestTrainServices,
   getTrainServices
 } from "./helpers/apiCaller";
-import messaging from "./helpers/firebaseMessaging";
+import Results from "./pages/Results";
+import Search from "./pages/Search";
+import Toolbar from "./components/toolbar/Toolbar";
 
+const StyledHeader = styled.header`
+   {
+    text-align: center;
+    background-image: linear-gradient(0deg, #004e74 0%, #674f66 100%);
+    max-width: 100%;
+    img {
+      max-width: 100%;
+    }
+  }
+`;
 class App extends Component {
   state = {
     userPreferences: {
@@ -48,17 +56,24 @@ class App extends Component {
     quickestJourneyDisabled: true,
     virginTrains: true,
     virginTrainsDisabled: false,
-    refreshRate: "manual"
+    refreshRate: "manual",
+    display: {
+      search: true,
+      results: false
+    }
   };
 
-  componentDidMount() {
-  }
+  componentDidMount() {}
   componentDidUpdate = (prevProps, prevState) => {
     if (prevState.journey !== this.state.journey) {
       this.getTrains();
     }
   };
-
+  updateDisplay = e => (item, value) => {
+    const display = { ...this.state };
+    display[item] = value;
+    this.setState({ display });
+  };
   updateDate = e => {
     const journey = { ...this.state.journey };
     journey.date = e.target.value;
@@ -136,53 +151,26 @@ class App extends Component {
     return (
       <Grid container className="App" justify="center">
         <Grid item xs={12}>
-          <header className="App-header">
-            <h1 className="App-title">
-              ===Main Train===
-              <br />
-              <span
-                onClick={this.addRemoveClasses}
-                className={this.state.animate}
-                role="img"
-                aria-label="train emoji"
-              >
-                &#x1F686;
-              </span>
-            </h1>
-          </header>
+          <StyledHeader>
+            <img src={Header} />
+          </StyledHeader>
         </Grid>
-        <Grid item xs={12} style={{ marginTop: "50px" }}>
-          <ServiceAlerts serviceAlerts={this.state.serviceAlerts} />
-          <TrainSearch
+        <Grid item xs={12} style={{ paddingBottom: "74px" }}>
+          <Search
+            display={this.state.display.search}
             updateStation={this.updateStation}
             updateDate={this.updateDate}
             updateTime={this.updateTime}
+            serviceAlerts={this.state.serviceAlerts}
           />
-        </Grid>
-        <Grid item xs={12}>
-          <VirginTrains
+          <Results
+            display={this.state.display.results}
             virginTrains={this.state.virginTrains}
             getVirginTrains={this.getVirginTrains}
             disabled={this.state.virginTrainsDisabled}
-          />
-
-          <FastestJourney
-            quickestJourney={this.state.quickestJourney}
-            setQuickestJourney={this.setQuickestJourney}
-            disabled={this.state.fastestJourneyDisabled}
-          />
-          <Refresh
-            refreshRate={this.state.refreshRate}
-            changeRefreshRate={this.changeRefreshRate}
-          />
-          <div onClick={this.refreshTrains}>
-            <WifiTethering className="live" />Live
-          </div>
-
-          <Timetable
             journeyTimetable={this.state.currentJourney}
-            virginTrains={this.state.virginTrains}
           />
+          <Toolbar />
         </Grid>
       </Grid>
     );
