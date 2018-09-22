@@ -5,25 +5,31 @@ import { Component, default as React } from "react";
 import StationFinder from "../station/StationFinder";
 import styled from "styled-components";
 
+const StyledGrid = styled(Grid)`
+  && {
+    margin: 20px;
+  }
+`;
+
 class TrainSearch extends Component {
   render() {
     const { updateStation } = this.props;
     return (
       <Grid container justify="center" alignItems="flex-start" direction="row">
-        <Grid item xs={10}>
+        <StyledGrid item xs={12}>
           <StationFinder
             label="I'm starting at:"
             stationType="departureStation"
             updateStation={updateStation}
           />
-        </Grid>
-        <Grid item xs={10}>
+        </StyledGrid>
+        <StyledGrid item xs={12}>
           <StationFinder
             label="I want to get to:"
             stationType="destinationStation"
             updateStation={updateStation}
           />
-        </Grid>
+        </StyledGrid>
         <Button
           // set an onClick to show the timetable
           variant="raised"

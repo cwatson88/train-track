@@ -81,8 +81,7 @@ class StationFinder extends Component {
             this.setStation(e, station["CRS Code"], station["Station Name"])
           }
         >
-          {station["CRS Code"]}-
-          {station["Station Name"]}
+          {station["CRS Code"]}-{station["Station Name"]}
         </StyledListItem>
       ));
     } else {
@@ -112,7 +111,7 @@ class StationFinder extends Component {
           <div
             style={{
               maxHeight: "180px",
-              overflow: "scroll"
+              overflowY: "scroll"
             }}
           >
             {/* if there is something in the box and therea */}
