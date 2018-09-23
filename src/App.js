@@ -152,7 +152,7 @@ class App extends Component {
       <Grid container className="App" justify="center">
         <Grid item xs={12}>
           <StyledHeader>
-            <img src={Header} />
+            <img src={Header} alt="header" />
           </StyledHeader>
         </Grid>
         <Grid item xs={12} style={{ paddingBottom: "74px" }}>
