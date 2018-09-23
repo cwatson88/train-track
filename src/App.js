@@ -11,6 +11,7 @@ import {
 import Results from "./pages/Results";
 import Search from "./pages/Search";
 import Toolbar from "./components/toolbar/Toolbar";
+import { ContextProvider } from "./mainContext";
 
 const StyledHeader = styled.header`
    {
@@ -149,30 +150,32 @@ class App extends Component {
 
   render() {
     return (
-      <Grid container className="App" justify="center">
-        <Grid item xs={12}>
-          <StyledHeader>
-            <img src={Header} alt="header" />
-          </StyledHeader>
+      <ContextProvider>
+        <Grid container className="App" justify="center">
+          <Grid item xs={12}>
+            <StyledHeader>
+              <img src={Header} alt="header" />
+            </StyledHeader>
+          </Grid>
+          <Grid item xs={12} style={{ paddingBottom: "74px" }}>
+            <Search
+              display={this.state.display.search}
+              updateStation={this.updateStation}
+              updateDate={this.updateDate}
+              updateTime={this.updateTime}
+              serviceAlerts={this.state.serviceAlerts}
+            />
+            <Results
+              display={this.state.display.results}
+              virginTrains={this.state.virginTrains}
+              getVirginTrains={this.getVirginTrains}
+              disabled={this.state.virginTrainsDisabled}
+              journeyTimetable={this.state.currentJourney}
+            />
+            <Toolbar />
+          </Grid>
         </Grid>
-        <Grid item xs={12} style={{ paddingBottom: "74px" }}>
-          <Search
-            display={this.state.display.search}
-            updateStation={this.updateStation}
-            updateDate={this.updateDate}
-            updateTime={this.updateTime}
-            serviceAlerts={this.state.serviceAlerts}
-          />
-          <Results
-            display={this.state.display.results}
-            virginTrains={this.state.virginTrains}
-            getVirginTrains={this.getVirginTrains}
-            disabled={this.state.virginTrainsDisabled}
-            journeyTimetable={this.state.currentJourney}
-          />
-          <Toolbar />
-        </Grid>
-      </Grid>
+      </ContextProvider>
     );
   }
 }
