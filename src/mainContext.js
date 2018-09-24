@@ -3,10 +3,11 @@ import {
   getQuickestTrainServices,
   getTrainServices
 } from "./helpers/apiCaller";
+import data from "./datastub";
 
-const ContextContext = createContext();
+const MainContext = createContext();
 
-const ContextConsumer = ContextContext.Consumer;
+const ContextConsumer = MainContext.Consumer;
 
 class ContextProvider extends Component {
   state = {
@@ -45,7 +46,8 @@ class ContextProvider extends Component {
     display: {
       search: true,
       results: false
-    }
+    },
+    stub: true
   };
 
   actions = {
@@ -92,36 +94,46 @@ class ContextProvider extends Component {
   };
 
   getTrains = async () => {
-    const { departureStation, destinationStation } = this.state.journey;
-    console.log("both are set");
-    if (departureStation && destinationStation) {
-      // reset departureStation to equal the CRS Code
-      const departureStationCRS = departureStation.stationCRS;
-      const destinationStationCRS = destinationStation.stationCRS;
-
-      const apiCallForTrains = async () =>
-        (await this.state.quickestJourney)
-          ? await getQuickestTrainServices(
-              destinationStationCRS,
-              departureStationCRS
-            )
-          : await getTrainServices(destinationStationCRS, departureStationCRS);
-
-      const result = await apiCallForTrains();
-      const currentJourney = await result.trainServices;
-      // this.state.quickestJourney
-      //   ? await result.departures
-      //   : await result.trainServices;
-      const serviceAlerts = await result.nrccMessages;
-
-      await this.setState({ currentJourney, serviceAlerts });
+    if (this.state.stub) {
+      const result = data;
+      const currentJourney = result.trainServices;
+      const serviceAlerts = result.nrccMessages;
+      this.setState({ currentJourney, serviceAlerts });
     } else {
-      console.log("items arent all updated yet");
+      const { departureStation, destinationStation } = this.state.journey;
+      console.log("both are set");
+      if (departureStation && destinationStation) {
+        // reset departureStation to equal the CRS Code
+        const departureStationCRS = departureStation.stationCRS;
+        const destinationStationCRS = destinationStation.stationCRS;
+
+        const apiCallForTrains = async () =>
+          (await this.state.quickestJourney)
+            ? await getQuickestTrainServices(
+                destinationStationCRS,
+                departureStationCRS
+              )
+            : await getTrainServices(
+                destinationStationCRS,
+                departureStationCRS
+              );
+
+        const result = await apiCallForTrains();
+        const currentJourney = await result.trainServices;
+        // this.state.quickestJourney
+        //   ? await result.departures
+        //   : await result.trainServices;
+        const serviceAlerts = await result.nrccMessages;
+
+        await this.setState({ currentJourney, serviceAlerts });
+      } else {
+        console.log("items arent all updated yet");
+      }
     }
   };
 
   render() {
-    const { Provider } = ContextContext;
+    const { Provider } = MainContext;
     const { state, actions } = this;
     return (
       <Provider value={{ state, actions }}>{this.props.children}</Provider>

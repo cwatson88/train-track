@@ -5,9 +5,6 @@ import { ContextConsumer } from "../../mainContext";
 import Service from "./Service";
 
 const Timetable = props => {
-  const stripes = { backgroundColor: "#ccd8a8" };
-  const timeTableRows = { paddingTop: "20px" };
-
   return (
     <ContextConsumer>
       {({ state, actions }) => {
@@ -17,15 +14,10 @@ const Timetable = props => {
           <Grid>
             {currentJourney &&
               currentJourney.map((journey, index) => {
-                const striped = index % 2 === 0 ? stripes : null;
                 return (
                   <Fragment key={journey.serviceID}>
-                    <Grid
-                      container
-                      justify="center"
-                      style={{ ...timeTableRows, ...striped }}
-                    >
-                      <Service />
+                    <Grid container justify="center">
+                      <Service journey={journey} />
                     </Grid>
                   </Fragment>
                 );
