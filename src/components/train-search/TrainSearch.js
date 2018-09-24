@@ -13,25 +13,25 @@ const StyledGrid = styled(Grid)`
 
 class TrainSearch extends Component {
   render() {
-    const { updateStation } = this.props;
+    const { updateStation, getTrains } = this.props;
     return (
       <Grid container justify="center" alignItems="flex-start" direction="row">
         <StyledGrid item xs={12}>
           <StationFinder
             label="I'm starting at:"
             stationType="departureStation"
-            updateStation={updateStation}
+            updateStation={updateStation()}
           />
         </StyledGrid>
         <StyledGrid item xs={12}>
           <StationFinder
             label="I want to get to:"
             stationType="destinationStation"
-            updateStation={updateStation}
+            updateStation={updateStation()}
           />
         </StyledGrid>
         <Button
-          // set an onClick to show the timetable
+          onClick={getTrains()}
           variant="raised"
           color="secondary"
           aria-label="Search Trains"

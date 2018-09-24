@@ -2,18 +2,22 @@ import { Grid } from "@material-ui/core";
 import React, { Component } from "react";
 import ServiceAlerts from "../components/service-alerts/ServiceAlerts";
 import TrainSearch from "../components/train-search/TrainSearch";
+import { ContextConsumer } from "../mainContext";
 
 class Search extends Component {
   render() {
     return (
-      <Grid item xs={12} style={{ marginTop: "50px" }}>
-        <ServiceAlerts serviceAlerts={this.props.serviceAlerts} />
-        <TrainSearch
-          updateStation={this.props.updateStation}
-          updateDate={this.props.updateDate}
-          updateTime={this.props.updateTime}
-        />
-      </Grid>
+      <ContextConsumer>
+        {({ state, actions }) => (
+          <Grid item xs={12} style={{ marginTop: "50px" }}>
+            <ServiceAlerts serviceAlerts={state.serviceAlerts} />
+            <TrainSearch
+              updateStation={actions.updateStation}
+              getTrains={actions.getTrains}
+            />
+          </Grid>
+        )}
+      </ContextConsumer>
     );
   }
 }
