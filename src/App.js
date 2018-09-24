@@ -8,6 +8,7 @@ import Results from "./pages/Results";
 import Search from "./pages/Search";
 import Toolbar from "./components/toolbar/Toolbar";
 import { ContextProvider, ContextConsumer } from "./mainContext";
+import * as Sentry from "@sentry/browser";
 
 const StyledHeader = styled.header`
    {
@@ -19,6 +20,11 @@ const StyledHeader = styled.header`
     }
   }
 `;
+
+Sentry.init({
+  dsn: "https://d9b3d683aded4bc7b67d4d49042424fb@sentry.io/1287271"
+});
+
 class App extends Component {
   render() {
     return (
