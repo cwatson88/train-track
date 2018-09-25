@@ -1,13 +1,13 @@
+import Grid from "@material-ui/core/Grid";
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import styled from "styled-components";
-import Grid from "@material-ui/core/Grid";
 import "./App.css";
 import Header from "./assets/Header.svg";
+import Toolbar from "./components/toolbar/Toolbar";
+import { ContextConsumer, ContextProvider } from "./mainContext";
 import Results from "./pages/Results";
 import Search from "./pages/Search";
-import Toolbar from "./components/toolbar/Toolbar";
-import { ContextProvider, ContextConsumer } from "./mainContext";
 
 const StyledHeader = styled.header`
    {
@@ -24,24 +24,26 @@ const StyledHeader = styled.header`
 class App extends Component {
   render() {
     return (
-      <ContextProvider>
-        <ContextConsumer>
-          {({ state, actions }) => (
-            <Grid container className="App" justify="center">
-              <Grid item xs={12}>
-                <StyledHeader>
-                  <img src={Header} alt="header" />
-                </StyledHeader>
+      <Router>
+        <ContextProvider>
+          <ContextConsumer>
+            {({ state, actions }) => (
+              <Grid container className="App" justify="center">
+                <Grid item xs={12}>
+                  <StyledHeader>
+                    <img src={Header} alt="header" />
+                  </StyledHeader>
+                </Grid>
+                <Grid item xs={12} style={{ paddingBottom: "74px" }}>
+                  <Route exact path="/" component={Search} />
+                  <Route path="/results" component={Results} />
+                  <Toolbar />
+                </Grid>
               </Grid>
-              <Grid item xs={12} style={{ paddingBottom: "74px" }}>
-                <Search />
-                <Results />
-                <Toolbar />
-              </Grid>
-            </Grid>
-          )}
-        </ContextConsumer>
-      </ContextProvider>
+            )}
+          </ContextConsumer>
+        </ContextProvider>
+      </Router>
     );
   }
 }

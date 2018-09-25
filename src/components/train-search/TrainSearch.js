@@ -36,6 +36,8 @@ class TrainSearch extends Component {
           color="secondary"
           aria-label="Search Trains"
           style={{ marginTop: "30px" }}
+          component={Link}
+          to="/results"
         >
           <Train />
           Get Journey!
