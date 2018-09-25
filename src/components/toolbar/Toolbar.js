@@ -12,7 +12,8 @@ const StyledNavigation = styled(BottomNavigation)`
     position: fixed;
     bottom: 0;
     overflow: hidden;
-    background-color: #804578e3;
+    // background-color: #804578e3;
+    background-color: rgba(152, 30, 88, 0.89);
     width: 100%;
     color: white;
     box-shadow: black;

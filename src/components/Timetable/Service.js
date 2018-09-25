@@ -13,6 +13,8 @@ const StyledContainer = styled(Grid)`
     min-height: 50px;
     margin: 20px;
     padding: 10px;
+    box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.2),
+      0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 3px 1px -2px rgba(0, 0, 0, 0.12);
   }
 `;
 
@@ -28,7 +30,13 @@ const Status = ({ status, delayed, className }) => (
 );
 
 const StyledStatus = styled(Status)`
-  color: ${props => (props.delayed === true ? "#ff4b4b" : "#C3DC2E")};
+  p {
+    color: ${props => (props.delayed === true ? "#ff4b4b" : "#C3DC2E")};
+  }
+`;
+
+const ResultParagraph = styled.p`
+  color: #80dbff;
 `;
 
 class Service extends Component {
@@ -40,31 +48,35 @@ class Service extends Component {
 
     console.log(`${operatorCode.toLowerCase()}.png`);
     return (
-      <StyledContainer container direction="row">
+      <StyledContainer container>
         <Grid item xs={12}>
           <Grid container direction="row" alignItems="flex-start">
             <Grid item xs={3}>
-              <Grid container direction="column">
+              <Grid container direction="column" justify="space-between">
                 <Grid item>Leaves at:</Grid>
-                <Grid item>{std}</Grid>
+                <Grid item>
+                  <ResultParagraph>{std}</ResultParagraph>
+                </Grid>
               </Grid>
             </Grid>
             <Grid item xs={3}>
-              <Grid container direction="column">
+              <Grid container direction="column" justify="space-between">
                 <Grid item>Platform:</Grid>
-                <Grid item>{platform}</Grid>
+                <Grid item>
+                  <ResultParagraph>{platform}</ResultParagraph>
+                </Grid>
               </Grid>
             </Grid>
             <Grid item xs={3}>
-              <Grid container direction="column">
+              <Grid container direction="column" justify="space-between">
                 <Grid item>Operator:</Grid>
-                <Grid item>{operator}</Grid>
                 <Grid>
                   <img
                     src={require(`../../assets/${operatorCode.toLowerCase()}.png`)}
                     alt="train operator logo"
                     width={"50px"}
                   />
+                  <ResultParagraph>{operator}</ResultParagraph>
                 </Grid>
               </Grid>
             </Grid>
@@ -73,30 +85,19 @@ class Service extends Component {
               delayed={etd === "Delayed" ? true : false}
             />
           </Grid>
-          <Grid container direction="row">
-            <Grid item xs={12}>
-              <hr />
-            </Grid>
-          </Grid>
-          <Grid container direction="row">
-            <Grid item xs={4}>
-              <IconButton aria-label="Delete">
-                <AddAlarm />
-              </IconButton>
-            </Grid>
-            <Grid item xs={4}>
-              <IconButton aria-label="Delete">
-                <AddAlarm />
-              </IconButton>
-            </Grid>
-            <Grid item xs={4}>
-              <IconButton aria-label="Delete">
-                <AddAlarm />
-              </IconButton>
-            </Grid>
-          </Grid>
-          <Grid />
         </Grid>
+        {/* <Grid container direction="column">
+          <Grid item xs={6}>
+            <IconButton aria-label="Delete">
+              <AddAlarm />
+            </IconButton>
+          </Grid>
+          <Grid item xs={6}>
+            <IconButton aria-label="Delete">
+              <AddAlarm />
+            </IconButton>
+          </Grid>
+        </Grid> */}
       </StyledContainer>
     );
   }
