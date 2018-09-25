@@ -82,6 +82,8 @@ class ContextProvider extends Component {
   };
 
   refreshData = () => {
+    // TODO: add a vibrate when the train is 5 mins from departing maybe?
+    // const vibrate = window.navigator.vibrate(200);
     if (this.state.refreshRate !== "manual") {
       clearInterval();
 
