@@ -39,7 +39,7 @@ class App extends Component {
                     </Grid>
                     <Grid item xs={12} style={{ paddingBottom: "74px" }}>
                       {console.log(location.pathname)}
-                      <Transition
+                      {/* <Transition
                         // native
                         config={{ tension: 1, friction: 10 }}
                         keys={location.pathname}
@@ -48,25 +48,25 @@ class App extends Component {
                         leave={{ opacity: 0, transform: "rotate(180deg)" }}
                       >
                         >
-                        {style => (
+                        {style => ( */}
                           <Switch location={location}>
                             <Route
                               exact
                               path="/"
-                              render={props => <Search style={style} />}
+                              render={props => <Search />}
                             />
                             <Route
                               exact
                               path="/index.html"
-                              render={props => <Search style={style} />}
+                              render={props => <Search />}
                             />
                             <Route
                               path="/results"
-                              render={props => <Results style={style} />}
+                              render={props => <Results />}
                             />
-                          </Switch>
-                        )}
-                      </Transition>
+                           </Switch>
+                        {/* )} */}
+                      {/* </Transition> */}
                       <Toolbar />
                     </Grid>
                   </Grid>
