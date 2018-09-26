@@ -6,11 +6,11 @@ import { ContextConsumer } from "../mainContext";
 
 class Search extends Component {
   render() {
+    const { styles } = this.props;
     return (
       <ContextConsumer>
         {({ state, actions }) => (
-          <Grid item xs={12} style={{ ...this.props.style, marginTop: "50px" }}>
-            {console.log(this.props.style)}
+          <Grid item xs={12} style={{ ...styles, marginTop: "50px" }}>
             <ServiceAlerts serviceAlerts={state.serviceAlerts} />
             <TrainSearch
               departureStation={state.journey.departureStation}

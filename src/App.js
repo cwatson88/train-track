@@ -38,8 +38,7 @@ class App extends Component {
                       </StyledHeader>
                     </Grid>
                     <Grid item xs={12} style={{ paddingBottom: "74px" }}>
-                      {console.log(location.pathname)}
-                      {/* <Transition
+                      <Transition
                         // native
                         config={{ tension: 1, friction: 10 }}
                         keys={location.pathname}
@@ -47,22 +46,31 @@ class App extends Component {
                         enter={{ opacity: 1, transform: "rotate(0deg)" }}
                         leave={{ opacity: 0, transform: "rotate(180deg)" }}
                       >
-                        >
-                        {style => ( */}
-                      <Switch location={location}>
-                        <Route exact path="/" render={props => <Search />} />
-                        <Route
-                          exact
-                          path="/index.html"
-                          render={props => <Search />}
-                        />
-                        <Route
-                          path="/:departure/to/:destination"
-                          component={Results}
-                        />
-                      </Switch>
-                      {/* )} */}
-                      {/* </Transition> */}
+                        {styles => (
+                          <Switch location={location}>
+                            <Route
+                              exact
+                              path="/"
+                              render={props => (
+                                <Search {...props} styles={styles} />
+                              )}
+                            />
+                            <Route
+                              exact
+                              path="/index.html"
+                              render={props => (
+                                <Search {...props} styles={styles} />
+                              )}
+                            />
+                            <Route
+                              path="/:departure/to/:destination"
+                              render={props => (
+                                <Results {...props} styles={styles} />
+                              )}
+                            />
+                          </Switch>
+                        )}
+                      </Transition>
                       <Toolbar />
                     </Grid>
                   </Grid>
