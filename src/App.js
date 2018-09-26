@@ -8,7 +8,7 @@ import Toolbar from "./components/toolbar/Toolbar";
 import { ContextConsumer, ContextProvider } from "./mainContext";
 import Results from "./pages/Results";
 import Search from "./pages/Search";
-import { Transition, config } from "react-spring";
+import { Transition, Spring } from "react-spring";
 
 const StyledHeader = styled.header`
    {
@@ -38,24 +38,31 @@ class App extends Component {
                       </StyledHeader>
                     </Grid>
                     <Grid item xs={12} style={{ paddingBottom: "74px" }}>
+                      {console.log(location.pathname)}
                       <Transition
-                        native
+                        // native
                         config={{ tension: 1, friction: 10 }}
-                        keys={location.pathname.split("/").filter(a => a)[0]}
-                        from={{ transform: "translateY(500px)", opacity: 0 }}
-                        enter={{ transform: "translateY(0px)", opacity: 1 }}
-                        leave={{ transform: "translateY(500px)", opacity: 0 }}
+                        keys={location.pathname}
+                        from={{ opacity: 0, transform: "rotate(-20deg)" }}
+                        enter={{ opacity: 1, transform: "rotate(0deg)" }}
+                        leave={{ opacity: 0, transform: "rotate(180deg)" }}
                       >
+                        >
                         {style => (
                           <Switch location={location}>
                             <Route
                               exact
                               path="/"
-                              render={() => <Search style={style} />}
+                              render={props => <Search style={style} />}
+                            />
+                            <Route
+                              exact
+                              path="/index.html"
+                              render={props => <Search style={style} />}
                             />
                             <Route
                               path="/results"
-                              render={() => <Results style={style} />}
+                              render={props => <Results style={style} />}
                             />
                           </Switch>
                         )}

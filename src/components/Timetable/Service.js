@@ -1,9 +1,7 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import styled from "styled-components";
 import Grid from "@material-ui/core/Grid";
-import IconButton from "@material-ui/core/IconButton";
-import AddAlarm from "@material-ui/icons/AddAlarm";
+import PropTypes from "prop-types";
+import React, { Component } from "react";
+import styled from "styled-components";
 // https://www.thetrainline.com/train-companies  (all the logos)
 
 const StyledContainer = styled(Grid)`
@@ -13,8 +11,7 @@ const StyledContainer = styled(Grid)`
     min-height: 50px;
     margin: 20px;
     padding: 10px;
-    box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.2),
-      0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 3px 1px -2px rgba(0, 0, 0, 0.12);
+    box-shadow: 3px 10px 11px 2px #00000030;
   }
 `;
 

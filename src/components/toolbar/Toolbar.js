@@ -16,8 +16,8 @@ const StyledNavigation = styled(BottomNavigation)`
     background-color: rgba(152, 30, 88, 0.89);
     width: 100%;
     color: white;
-    box-shadow: black;
     border-radius: 50px 50px 0 0;
+    box-shadow: 0px -1px 8px 0px #00000030;
     && button {
       color: white;
       font-family: Raleway;
