@@ -9,7 +9,8 @@ class Search extends Component {
     return (
       <ContextConsumer>
         {({ state, actions }) => (
-          <Grid item xs={12} style={{ marginTop: "50px" }}>
+          <Grid item xs={12} style={{ ...this.props.style, marginTop: "50px" }}>
+            {console.log(this.props.style)}
             <ServiceAlerts serviceAlerts={state.serviceAlerts} />
             <TrainSearch
               updateStation={actions.updateStation}
