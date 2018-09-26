@@ -18,12 +18,27 @@ class TrainSearch extends Component {
     this.destination = React.createRef();
   }
 
+  state = {
+    disableButton: true
+  };
+
+  componentDidUpdate(prevProps, prevState) {
+    if (
+      this.props.departureStation !== prevProps.departureStation ||
+      this.props.destinationStation !== prevProps.destinationStation
+    ) {
+      this.props.destinationStation && this.props.departureStation
+        ? this.setState({ disableButton: false })
+        : this.setState({ disableButton: true });
+    }
+  }
+
   scrollViewable = item => {
     item.scrollIntoView();
   };
 
   render() {
-    const { updateStation, getTrains } = this.props;
+    const { updateStation, destinationStation, departureStation } = this.props;
     return (
       <Grid container justify="center" alignItems="flex-start" direction="row">
         <StyledGrid item xs={12}>
@@ -45,13 +60,15 @@ class TrainSearch extends Component {
           />
         </StyledGrid>
         <Button
-          onClick={getTrains()}
+          disabled={this.state.disableButton}
           variant="raised"
           color="secondary"
           aria-label="Search Trains"
           style={{ marginTop: "30px" }}
           component={Link}
-          to="/results"
+          to={`/${departureStation.stationCRS}/to/${
+            destinationStation.stationCRS
+          }`}
         >
           <Train />
           Get Journey!

@@ -49,23 +49,19 @@ class App extends Component {
                       >
                         >
                         {style => ( */}
-                          <Switch location={location}>
-                            <Route
-                              exact
-                              path="/"
-                              render={props => <Search />}
-                            />
-                            <Route
-                              exact
-                              path="/index.html"
-                              render={props => <Search />}
-                            />
-                            <Route
-                              path="/results"
-                              render={props => <Results />}
-                            />
-                           </Switch>
-                        {/* )} */}
+                      <Switch location={location}>
+                        <Route exact path="/" render={props => <Search />} />
+                        <Route
+                          exact
+                          path="/index.html"
+                          render={props => <Search />}
+                        />
+                        <Route
+                          path="/:departure/to/:destination"
+                          component={Results}
+                        />
+                      </Switch>
+                      {/* )} */}
                       {/* </Transition> */}
                       <Toolbar />
                     </Grid>

@@ -35,6 +35,14 @@ const StyledStatus = styled(Status)`
 const ResultParagraph = styled.p`
   color: #80dbff;
 `;
+const getTrainProviderImage = operatorCode => {
+  try {
+    return require(`../../assets/${operatorCode.toLowerCase()}.png`);
+  } catch (e) {
+    console.log(e);
+    return require("../../assets/vt.png");
+  }
+};
 
 class Service extends Component {
   render() {
@@ -43,7 +51,6 @@ class Service extends Component {
     // std is scheduled time to depart (I think)
     // etd is estimated time to depart
 
-    console.log(`${operatorCode.toLowerCase()}.png`);
     return (
       <StyledContainer container>
         <Grid item xs={12}>
@@ -69,7 +76,7 @@ class Service extends Component {
                 <Grid item>Operator:</Grid>
                 <Grid>
                   <img
-                    src={require(`../../assets/${operatorCode.toLowerCase()}.png`)}
+                    src={getTrainProviderImage(operatorCode)}
                     alt="train operator logo"
                     width={"50px"}
                   />

@@ -13,6 +13,8 @@ class Search extends Component {
             {console.log(this.props.style)}
             <ServiceAlerts serviceAlerts={state.serviceAlerts} />
             <TrainSearch
+              departureStation={state.journey.departureStation}
+              destinationStation={state.journey.destinationStation}
               updateStation={actions.updateStation}
               getTrains={actions.getTrains}
             />
