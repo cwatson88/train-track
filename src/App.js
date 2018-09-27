@@ -7,7 +7,7 @@ import Toolbar from "./components/toolbar/Toolbar";
 import { ContextConsumer, ContextProvider } from "./mainContext";
 import Results from "./pages/Results";
 import Search from "./pages/Search";
-import { Transition, Spring } from "react-spring";
+import { Transition, config } from "react-spring";
 
 const StyledHeader = styled.header`
    {
@@ -26,7 +26,7 @@ class App extends Component {
     return (
       <Router>
         <Route
-          render={({ location }) => (
+          render={({ location, history }) => (
             <ContextProvider>
               <ContextConsumer>
                 {({ state, actions }) => (
@@ -44,11 +44,11 @@ class App extends Component {
                     <Grid item xs={12} style={{ paddingBottom: "74px" }}>
                       <Transition
                         // native
-                        config={{ tension: 1, friction: 10 }}
+                        config={config.default}
                         keys={location.pathname}
-                        from={{ opacity: 1, transform: "rotate(0deg)" }}
-                        enter={{ opacity: 1, transform: "rotate(0deg)" }}
-                        leave={{ opacity: 0, transform: "rotate(180deg)" }}
+                        from={{ opacity: 0 }}
+                        enter={{ opacity: 1 }}
+                        leave={{ opacity: 0 }}
                       >
                         {styles => (
                           <Switch location={location}>
@@ -75,7 +75,7 @@ class App extends Component {
                           </Switch>
                         )}
                       </Transition>
-                      <Toolbar />
+                      <Toolbar location={location} history={history} />
                     </Grid>
                   </Grid>
                 )}

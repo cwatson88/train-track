@@ -7,7 +7,7 @@ class Results extends Component {
   state = {
     journeyDetailst: "",
     journeyTimetable: null,
-    offlineTesting: false
+    offlineTesting: true
   };
   // TODO: needs a train like loader!
   componentDidMount() {

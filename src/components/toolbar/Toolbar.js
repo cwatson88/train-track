@@ -6,6 +6,7 @@ import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 import TrainIcon from "@material-ui/icons/Train";
 import FavoriteIcon from "@material-ui/icons/Favorite";
 import FilterListIcon from "@material-ui/icons/FilterList";
+import { Link } from "react-router-dom";
 
 const StyledNavigation = styled(BottomNavigation)`
   &&& {
@@ -28,6 +29,9 @@ const StyledNavigation = styled(BottomNavigation)`
 class Toolbar extends Component {
   state = { value: 0 };
   handleChange = (event, value) => {
+    // TODO: push the history to set the page!
+    this.props.history.push(value);
+
     this.setState({ value });
   };
 
@@ -36,7 +40,11 @@ class Toolbar extends Component {
 
     return (
       <StyledNavigation value={value} onChange={this.handleChange} showLabels>
-        <BottomNavigationAction label="New Journey" icon={<TrainIcon />} />
+        <BottomNavigationAction
+          value="/"
+          label="New Journey"
+          icon={<TrainIcon />}
+        />
         <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
         <BottomNavigationAction label="Filters" icon={<FilterListIcon />} />
       </StyledNavigation>
