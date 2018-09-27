@@ -7,7 +7,6 @@ import Toolbar from "./components/toolbar/Toolbar";
 import { ContextConsumer, ContextProvider } from "./mainContext";
 import Results from "./pages/Results";
 import Search from "./pages/Search";
-import { Transition, config } from "react-spring";
 
 const StyledHeader = styled.header`
    {
@@ -42,39 +41,17 @@ class App extends Component {
                       </StyledHeader>
                     </Grid>
                     <Grid item xs={12} style={{ paddingBottom: "74px" }}>
-                      <Transition
-                        // native
-                        config={config.default}
-                        keys={location.pathname}
-                        from={{ opacity: 0 }}
-                        enter={{ opacity: 1 }}
-                        leave={{ opacity: 0 }}
-                      >
-                        {styles => (
-                          <Switch location={location}>
-                            <Route
-                              exact
-                              path="/"
-                              render={props => (
-                                <Search {...props} styles={styles} />
-                              )}
-                            />
-                            <Route
-                              exact
-                              path="/index.html"
-                              render={props => (
-                                <Search {...props} styles={styles} />
-                              )}
-                            />
-                            <Route
-                              path="/:departureStation/to/:destinationStation"
-                              render={props => (
-                                <Results {...props} styles={styles} />
-                              )}
-                            />
-                          </Switch>
-                        )}
-                      </Transition>
+                      <Switch location={location}>
+                        <Route
+                          exact
+                          path="(/|/index.html)"
+                          render={props => <Search {...props} />}
+                        />
+                        <Route
+                          path="/:departureStation/to/:destinationStation"
+                          render={props => <Results {...props} />}
+                        />
+                      </Switch>
                       <Toolbar location={location} history={history} />
                     </Grid>
                   </Grid>
