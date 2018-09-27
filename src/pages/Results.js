@@ -1,21 +1,31 @@
 import { Grid } from "@material-ui/core";
 import React, { Component } from "react";
 import Timetable from "../components/timetable/Timetable";
-import { getTrainServices } from "../helpers/apiCaller";
+import { getTrainServices, dataStub } from "../helpers/apiCaller";
 
 class Results extends Component {
   state = {
     journeyDetailst: "",
-    journeyTimetable: null
+    journeyTimetable: null,
+    offlineTesting: false
   };
+  // TODO: needs a train like loader!
   componentDidMount() {
-    const { departure, destination } = this.props.match.params;
-    getTrainServices(departure, destination).then(timetable =>
-      this.setState({ journeyTimetable: timetable.trainServices })
-    );
-    // TODO: needs a train like loader!
-    // TODO: add the api call here and pass to timetable? OR as state? AND to context state
+    const { departureStation, destinationStation } = this.props.match.params;
+    this.getTrains({ departureStation, destinationStation });
   }
+
+  getTrains = ({ departureStation, destinationStation }) => {
+    if (this.state.offlineTesting) {
+      this.setState({ journeyTimetable: dataStub.trainServices });
+    } else {
+      getTrainServices({ departureStation, destinationStation }).then(
+        timetable =>
+          this.setState({ journeyTimetable: timetable.trainServices })
+      );
+    }
+  };
+
   render() {
     const { match, location, styles } = this.props;
     return (

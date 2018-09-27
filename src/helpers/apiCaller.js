@@ -5,11 +5,12 @@
  */
 
 import axios from "axios";
+import dataStub from "../helpers/datastub";
 
 //huxley.apphb.com/service/dVa4Unn2fgeKxlVQ_4OfrA?accessToken=de3373f2-54fc-4e1a-9ffc-ebc14108b1a3
-const getTrainServices = async (to, from) => {
+const getTrainServices = async ({ departureStation, destinationStation }) => {
   const accessToken = "accessToken=de3373f2-54fc-4e1a-9ffc-ebc14108b1a3";
-  const apiUrl = `https://huxley.apphb.com/departures/${from}/to/${to}?${accessToken}`;
+  const apiUrl = `https://huxley.apphb.com/departures/${departureStation}/to/${destinationStation}?${accessToken}`;
   try {
     const response = await axios.get(apiUrl);
     return response.data;
@@ -41,4 +42,9 @@ const getServiceDetails = async serviceID => {
   }
 };
 
-export { getTrainServices, getServiceDetails, getQuickestTrainServices };
+export {
+  getTrainServices,
+  getServiceDetails,
+  getQuickestTrainServices,
+  dataStub
+};

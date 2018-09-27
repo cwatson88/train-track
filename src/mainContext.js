@@ -3,7 +3,7 @@ import {
   getQuickestTrainServices,
   getTrainServices
 } from "./helpers/apiCaller";
-import data from "./datastub";
+import data from "./helpers/datastub";
 
 const MainContext = createContext();
 

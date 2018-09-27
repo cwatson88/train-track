@@ -31,7 +31,12 @@ class App extends Component {
             <ContextProvider>
               <ContextConsumer>
                 {({ state, actions }) => (
-                  <Grid container className="App" justify="center">
+                  <Grid
+                    container
+                    style={{ textAlign: "center" }}
+                    className="App"
+                    justify="center"
+                  >
                     <Grid item xs={12}>
                       <StyledHeader>
                         <img src={Header} alt="header" />
@@ -42,7 +47,7 @@ class App extends Component {
                         // native
                         config={{ tension: 1, friction: 10 }}
                         keys={location.pathname}
-                        from={{ opacity: 0, transform: "rotate(-20deg)" }}
+                        from={{ opacity: 1, transform: "rotate(0deg)" }}
                         enter={{ opacity: 1, transform: "rotate(0deg)" }}
                         leave={{ opacity: 0, transform: "rotate(180deg)" }}
                       >
@@ -63,7 +68,7 @@ class App extends Component {
                               )}
                             />
                             <Route
-                              path="/:departure/to/:destination"
+                              path="/:departureStation/to/:destinationStation"
                               render={props => (
                                 <Results {...props} styles={styles} />
                               )}
