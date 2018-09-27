@@ -2,7 +2,6 @@ import Grid from "@material-ui/core/Grid";
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import styled from "styled-components";
-import "./App.css";
 import Header from "./assets/Header.svg";
 import Toolbar from "./components/toolbar/Toolbar";
 import { ContextConsumer, ContextProvider } from "./mainContext";
