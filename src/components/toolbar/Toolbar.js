@@ -29,9 +29,7 @@ const StyledNavigation = styled(BottomNavigation)`
 class Toolbar extends Component {
   state = { value: 0 };
   handleChange = (event, value) => {
-    // TODO: push the history to set the page!
     this.props.history.push(value);
-
     this.setState({ value });
   };
 
@@ -45,7 +43,11 @@ class Toolbar extends Component {
           label="New Journey"
           icon={<TrainIcon />}
         />
-        <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
+        <BottomNavigationAction
+          value="/favourites"
+          label="Favorites"
+          icon={<FavoriteIcon />}
+        />
         <BottomNavigationAction label="Filters" icon={<FilterListIcon />} />
       </StyledNavigation>
     );

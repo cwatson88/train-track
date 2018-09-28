@@ -2,16 +2,21 @@ import { Grid } from "@material-ui/core";
 import React, { Component } from "react";
 import Timetable from "../components/timetable/Timetable";
 import { getTrainServices, dataStub } from "../helpers/apiCaller";
+import styled from "styled-components";
 
+// TODO:style the h1 below
+const StyledH1 = styled.h1``;
 class Results extends Component {
   state = {
-    journeyDetailst: "",
     journeyTimetable: null,
-    offlineTesting: true
+    offlineTesting: false,
+    departureStation: "",
+    destinationStation: ""
   };
   // TODO: needs a train like loader!
   componentDidMount() {
     const { departureStation, destinationStation } = this.props.match.params;
+    this.setState({ departureStation, destinationStation });
     this.getTrains({ departureStation, destinationStation });
   }
 
@@ -27,9 +32,17 @@ class Results extends Component {
   };
 
   render() {
-    const { match, location, styles } = this.props;
+    const {
+      match,
+      location,
+      destinationStation,
+      departureStation
+    } = this.props;
     return (
-      <Grid item xs={12} style={{ ...styles }}>
+      <Grid item xs={12}>
+        <h1>
+          From {this.state.departureStation} to {this.state.destinationStation}
+        </h1>
         {this.state.journeyTimetable && (
           <Timetable journeyTimetable={this.state.journeyTimetable} />
         )}
