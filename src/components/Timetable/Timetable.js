@@ -9,15 +9,14 @@ const Timetable = props => {
   return (
     <Grid>
       <Trail
-        native
-        from={{ opacity: 0, transform: "translate3d(0px,0,0)" }}
-        to={{ opacity: 1, transform: "translate3d(100px,0,0)" }}
+        from={{ opacity: 0 }}
+        to={{ opacity: 1 }}
         keys={journeyTimetable.map(item => item.serviceID)}
         config={config.molasses}
       >
         {journeyTimetable.map(currentJourney => styles => (
           <Fragment key={currentJourney.serviceID}>
-            <Grid container justify="center" style={{ ...styles }}>
+            <Grid container justify="center" style={styles}>
               <Service journey={currentJourney} />
             </Grid>
           </Fragment>
