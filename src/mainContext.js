@@ -47,7 +47,7 @@ class ContextProvider extends Component {
       search: true,
       results: false
     },
-    stub: false
+    stub: true
   };
 
   actions = {

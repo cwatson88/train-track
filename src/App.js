@@ -35,6 +35,7 @@ class App extends Component {
                     className="App"
                     justify="center"
                   >
+                    <StyledBanner />
                     <Grid item xs={12}>
                       <StyledHeader>
                         <img src={Header} alt="header" />

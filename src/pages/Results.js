@@ -5,7 +5,9 @@ import { getTrainServices, dataStub } from "../helpers/apiCaller";
 import styled from "styled-components";
 
 // TODO:style the h1 below
-const StyledH1 = styled.h1``;
+const StyledH1 = styled.h1`
+  font-family: Raleway;
+`;
 class Results extends Component {
   state = {
     journeyTimetable: null,
@@ -40,9 +42,9 @@ class Results extends Component {
     } = this.props;
     return (
       <Grid item xs={12}>
-        <h1>
+        <StyledH1>
           From {this.state.departureStation} to {this.state.destinationStation}
-        </h1>
+        </StyledH1>
         {this.state.journeyTimetable && (
           <Timetable journeyTimetable={this.state.journeyTimetable} />
         )}
