@@ -17,7 +17,7 @@ const Timetable = props => {
       >
         {journeyTimetable.map(currentJourney => styles => (
           <Fragment key={currentJourney.serviceID}>
-            <Grid container justify="center" style={{...styles}}>
+            <Grid container justify="center" style={{ ...styles }}>
               <Service journey={currentJourney} />
             </Grid>
           </Fragment>
