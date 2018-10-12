@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import "./helpers/firebaseInit";
+import "./utils/firebaseInit";
 import "./index.css";
 import App from "./App";
 import "./global-styles.js";

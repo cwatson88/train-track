@@ -1,7 +1,7 @@
 import { Grid } from "@material-ui/core";
 import React, { Component } from "react";
 import Timetable from "../components/timetable/Timetable";
-import { getTrainServices, dataStub } from "../helpers/apiCaller";
+import { getTrainServices, dataStub } from "../utils/apiCaller";
 import styled from "styled-components";
 
 // TODO:style the h1 below

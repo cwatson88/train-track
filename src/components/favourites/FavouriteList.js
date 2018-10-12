@@ -1,28 +1,21 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import Chip from "@material-ui/core/Chip";
-import FaceIcon from "@material-ui/icons/Face";
-import DoneIcon from "@material-ui/icons/Done";
+import FavouriteItem from "./FavouriteItem";
 
 class FavouriteList extends Component {
-  handleClick = () => {
-    console.log("clicked");
-  };
-  handleDelete = () => {
-    console.log("clicked");
-  };
-
   render() {
+    const favourites = [
+      { departureStation: "BHI", destinationStation: "Eus" },
+      { departureStation: "EUS", destinationStation: "BHI" }
+    ];
     return (
       <div>
-        <Chip
-          label={`${this.props.departureStation} to ${
-            this.props.destinationStation
-          }}`}
-          onClick={this.handleClick}
-          onDelete={this.handleDelete}
-          deleteIcon={<DoneIcon />}
-        />
+        {favourites.map(item => (
+          <FavouriteItem
+            destinationStation={item.destinationStation}
+            departureStation={item.departureStation}
+          />
+        ))}
       </div>
     );
   }

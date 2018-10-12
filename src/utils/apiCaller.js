@@ -5,7 +5,7 @@
  */
 
 import axios from "axios";
-import dataStub from "../helpers/datastub";
+import dataStub from "../utils/datastub";
 
 //huxley.apphb.com/service/dVa4Unn2fgeKxlVQ_4OfrA?accessToken=de3373f2-54fc-4e1a-9ffc-ebc14108b1a3
 const getTrainServices = async ({ departureStation, destinationStation }) => {

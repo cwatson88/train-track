@@ -7,6 +7,7 @@ import Toolbar from "./components/toolbar/Toolbar";
 import { ContextConsumer, ContextProvider } from "./mainContext";
 import Results from "./pages/Results";
 import Search from "./pages/Search";
+import Favourites from "./pages/Favourites";
 
 const StyledHeader = styled.header`
    {
@@ -50,6 +51,10 @@ class App extends Component {
                         <Route
                           path="/:departureStation/to/:destinationStation"
                           render={props => <Results {...props} />}
+                        />
+                        <Route
+                          path="/favourites"
+                          render={props => <Favourites {...props} />}
                         />
                       </Switch>
                       <Toolbar location={location} history={history} />

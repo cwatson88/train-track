@@ -1,16 +1,31 @@
 import { shallow } from "enzyme";
 import React from "react";
-import FavouritePage from "../components/favourites/FavouriteList";
+import FavouriteList from "../components/favourites/FavouriteList";
+import FavouriteItem from "../components/favourites/FavouriteItem";
 import "../setupTests";
 
-describe("Lets get the favourite up and running!", () => {
-  const wrapper = shallow(<FavouritePage />);
+describe("FavouriteList tests", () => {
+  const wrapper = shallow(<FavouriteList />);
 
-  test("Favourite page does mount", () => {
+  test("Favourite list mounts", () => {
     expect(wrapper.exists()).toBe(true);
   });
 
-  test("Render a list of favourites from props", () => {
-    expect(wrapper.find(".favourite")).toHaveLength(favourites.length);
+  test("Render a list of favourites", () => {
+    expect(wrapper.find(FavouriteItem)).toHaveLength(2);
   });
 });
+
+describe("FavouriteItem tests", () => {
+  const wrapper = shallow(<FavouriteItem />);
+  test("Favourite components to mount", () => {
+    expect(wrapper.exists()).toBe(true);
+  });
+});
+
+/* 
+  Favourites: (favourite list and favourite items, two seperate components)
+    - list of favourites
+    - favourites get deleted when you click the x 
+    - a favourite item comes from props
+*/

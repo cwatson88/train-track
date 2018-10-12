@@ -2,7 +2,7 @@ import React, { Component, Fragment } from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import TextField from "@material-ui/core/TextField";
-import crsCodes from "../../helpers/crsCode";
+import crsCodes from "../../utils/crsCode";
 import { List, ListItem } from "@material-ui/core";
 
 const StyledTextField = styled(TextField)`

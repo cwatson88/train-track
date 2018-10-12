@@ -2,8 +2,8 @@ import React, { Component, createContext } from "react";
 import {
   getQuickestTrainServices,
   getTrainServices
-} from "./helpers/apiCaller";
-import data from "./helpers/datastub";
+} from "./utils/apiCaller";
+import data from "./utils/datastub";
 
 const MainContext = createContext();
 
