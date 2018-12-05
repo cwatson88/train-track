@@ -5,16 +5,18 @@ import Service from "./Service";
 import { Trail, config } from "react-spring";
 
 const Timetable = props => {
-  const { journeyTimetable } = props;
+  const {
+    journeyTimetable: { service }
+  } = props;
   return (
     <Grid>
       <Trail
         from={{ opacity: 0 }}
         to={{ opacity: 1 }}
-        keys={journeyTimetable.map(item => item.serviceID)}
+        keys={service.map(item => item.serviceID)}
         config={config.molasses}
       >
-        {journeyTimetable.map(currentJourney => styles => (
+        {service.map(currentJourney => styles => (
           <Fragment key={currentJourney.serviceID}>
             <Grid container justify="center" style={styles}>
               <Service journey={currentJourney} />

@@ -20,7 +20,7 @@ const getTrainServices = async ({ departureStation, destinationStation }) => {
 };
 /* const getTrainServices = async ({ departureStation, destinationStation }) => {
   const accessToken = "accessToken=de3373f2-54fc-4e1a-9ffc-ebc14108b1a3";
-  const apiUrl = `https://huxley.apphb.com/departures/${departureStation}/to/${destinationStation}?${accessToken}`;
+  const apiUrl = `https://main-train.herokuapp.com/departureBoard/${departureStation}-${destinationStation}`;
   try {
     const response = await axios.get(apiUrl);
     return response.data;
