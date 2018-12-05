@@ -6,18 +6,23 @@ import DeleteIcon from "@material-ui/icons/Delete";
 
 class FavouriteItem extends Component {
   state = {
-    icon: <FavoriteIcon />
+    icon: <FavoriteIcon />,
+    delete: false
   };
   handleClick = () => {
     console.log("clicked");
   };
   handleDelete = () => {
-    console.log("deleted");
+    if (this.state.delete) {
+      console.log("deleted");
+    } else {
+      console.log("Nah don't delete brah");
+    }
   };
 
   handleButtonPress = () => {
     this.buttonPressTimer = setTimeout(
-      () => this.setState({ icon: <DeleteIcon /> }),
+      () => this.setState({ icon: <DeleteIcon />, delete: true }),
       1300
     );
   };
@@ -45,6 +50,9 @@ class FavouriteItem extends Component {
   }
 }
 
-FavouriteItem.propTypes = {};
+FavouriteItem.propTypes = {
+  destinationStation: PropTypes.string,
+  departureStation: PropTypes.string
+};
 
 export default FavouriteItem;

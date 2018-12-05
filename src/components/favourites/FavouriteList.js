@@ -10,8 +10,9 @@ class FavouriteList extends Component {
     ];
     return (
       <div>
-        {favourites.map(item => (
+        {favourites.map((item, index) => (
           <FavouriteItem
+            key={index}
             destinationStation={item.destinationStation}
             departureStation={item.departureStation}
           />

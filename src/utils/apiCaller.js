@@ -9,6 +9,16 @@ import dataStub from "../utils/datastub";
 
 //huxley.apphb.com/service/dVa4Unn2fgeKxlVQ_4OfrA?accessToken=de3373f2-54fc-4e1a-9ffc-ebc14108b1a3
 const getTrainServices = async ({ departureStation, destinationStation }) => {
+  const apiUrl = `https://main-train.herokuapp.com/departureBoard/${departureStation}-${destinationStation}/40`;
+  try {
+    const response = await axios.get(apiUrl);
+    console.log(response);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+};
+/* const getTrainServices = async ({ departureStation, destinationStation }) => {
   const accessToken = "accessToken=de3373f2-54fc-4e1a-9ffc-ebc14108b1a3";
   const apiUrl = `https://huxley.apphb.com/departures/${departureStation}/to/${destinationStation}?${accessToken}`;
   try {
@@ -17,7 +27,7 @@ const getTrainServices = async ({ departureStation, destinationStation }) => {
   } catch (error) {
     console.error(error);
   }
-};
+}; */
 //huxley.apphb.com/service/dVa4Unn2fgeKxlVQ_4OfrA?accessToken=de3373f2-54fc-4e1a-9ffc-ebc14108b1a3
 const getQuickestTrainServices = async (to, from) => {
   const accessToken = "accessToken=de3373f2-54fc-4e1a-9ffc-ebc14108b1a3";
