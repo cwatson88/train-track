@@ -4,18 +4,16 @@ import Timetable from "../components/timetable/Timetable";
 import { getTrainServices, dataStub } from "../utils/apiCaller";
 import styled from "styled-components";
 
-// TODO:style the h1 below
 const StyledH1 = styled.h1`
   font-family: Raleway;
 `;
 class Results extends Component {
   state = {
-    journeyTimetable: null,
+    journeyTimetable: [],
     offlineTesting: false,
     departureStation: "",
     destinationStation: ""
   };
-  // TODO: needs a train like loader!
   componentDidMount() {
     const { departureStation, destinationStation } = this.props.match.params;
     this.setState({ departureStation, destinationStation });

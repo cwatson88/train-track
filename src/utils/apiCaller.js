@@ -12,7 +12,6 @@ const getTrainServices = async ({ departureStation, destinationStation }) => {
   const apiUrl = `https://main-train.herokuapp.com/departureBoard/${departureStation}-${destinationStation}/40`;
   try {
     const response = await axios.get(apiUrl);
-    console.log(response);
     return response.data;
   } catch (error) {
     console.error(error);

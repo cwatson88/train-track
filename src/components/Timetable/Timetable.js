@@ -13,12 +13,13 @@ const Timetable = props => {
       <Trail
         from={{ opacity: 0 }}
         to={{ opacity: 1 }}
-        keys={service.map(item => item.serviceID)}
+        keys={service.map(item => item.rid)}
         config={config.molasses}
       >
         {service.map(currentJourney => styles => (
-          <Fragment key={currentJourney.serviceID}>
+          <Fragment key={currentJourney.rid}>
             <Grid container justify="center" style={styles}>
+              {console.log(currentJourney)}
               <Service journey={currentJourney} />
             </Grid>
           </Fragment>
