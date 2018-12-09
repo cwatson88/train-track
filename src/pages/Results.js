@@ -9,7 +9,7 @@ const StyledH1 = styled.h1`
 `;
 class Results extends Component {
   state = {
-    journeyTimetable: [],
+    journeyTimetable: null,
     offlineTesting: false,
     departureStation: "",
     destinationStation: ""
@@ -24,9 +24,16 @@ class Results extends Component {
     if (this.state.offlineTesting) {
       this.setState({ journeyTimetable: dataStub.trainServices });
     } else {
-      getTrainServices({ departureStation, destinationStation }).then(
-        timetable =>
-          this.setState({ journeyTimetable: timetable.trainServices })
+      getTrainServices({
+        departureStation,
+        destinationStation
+      }).then(timetable =>
+        this.setState(
+          {
+            journeyTimetable: timetable.GetBoardWithDetailsResult.trainServices
+          },
+          () => console.log(this.state)
+        )
       );
     }
   };

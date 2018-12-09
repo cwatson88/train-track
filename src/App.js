@@ -29,7 +29,7 @@ class App extends Component {
           render={({ location, history }) => (
             <ContextProvider>
               <ContextConsumer>
-                {({ state, actions }) => (
+                {({ state: cxState, actions }) => (
                   <Grid
                     container
                     style={{ textAlign: "center" }}
