@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import FavouriteItem from "./FavouriteItem";
 
 class FavouriteList extends Component {
@@ -21,7 +20,5 @@ class FavouriteList extends Component {
     );
   }
 }
-
-FavouriteList.propTypes = {};
 
 export default FavouriteList;

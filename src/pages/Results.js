@@ -39,12 +39,6 @@ class Results extends Component {
   };
 
   render() {
-    const {
-      match,
-      location,
-      destinationStation,
-      departureStation
-    } = this.props;
     return (
       <Grid item xs={12}>
         <StyledH1>

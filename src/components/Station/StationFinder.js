@@ -49,6 +49,7 @@ class StationFinder extends Component {
       ) {
         return item;
       }
+      return null;
     });
     this.setState({ stations: stationSearch, searchBoxValue: searchString });
   };
@@ -122,6 +123,8 @@ class StationFinder extends Component {
   }
 }
 
-StationFinder.propTypes = {};
+StationFinder.propTypes = {
+  label: PropTypes.string
+};
 
 export default StationFinder;
