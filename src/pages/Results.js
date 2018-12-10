@@ -28,12 +28,9 @@ class Results extends Component {
         departureStation,
         destinationStation
       }).then(timetable =>
-        this.setState(
-          {
-            journeyTimetable: timetable.GetBoardWithDetailsResult.trainServices
-          },
-          () => console.log(this.state)
-        )
+        this.setState({
+          journeyTimetable: timetable.GetBoardWithDetailsResult.trainServices
+        })
       );
     }
   };

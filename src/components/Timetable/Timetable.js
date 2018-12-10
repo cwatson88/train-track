@@ -19,7 +19,6 @@ const Timetable = props => {
         {service.map(currentJourney => styles => (
           <Fragment key={currentJourney.rid}>
             <Grid container justify="center" style={styles}>
-              {console.log(currentJourney)}
               <Service journey={currentJourney} />
             </Grid>
           </Fragment>

@@ -4,7 +4,9 @@ import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
 import TrainIcon from "@material-ui/icons/Train";
 import FavoriteIcon from "@material-ui/icons/Favorite";
-import FilterListIcon from "@material-ui/icons/FilterList";
+import RefreshIcon from "@material-ui/icons/Refresh";
+import CurrentIcon from "@material-ui/icons/PlayCircleOutline";
+import { Link } from "react-router-dom";
 
 const StyledNavigation = styled(BottomNavigation)`
   &&& {
@@ -42,11 +44,20 @@ class Toolbar extends Component {
           icon={<TrainIcon />}
         />
         <BottomNavigationAction
+          value="/current"
+          label="Current Journey"
+          icon={<CurrentIcon />}
+        />
+        <BottomNavigationAction
           value="/favourites"
           label="Favorites"
           icon={<FavoriteIcon />}
         />
-        <BottomNavigationAction label="Filters" icon={<FilterListIcon />} />
+        <BottomNavigationAction
+          value="/recent"
+          label="Recent"
+          icon={<RefreshIcon />}
+        />
       </StyledNavigation>
     );
   }
