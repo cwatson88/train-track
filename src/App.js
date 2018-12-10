@@ -8,6 +8,7 @@ import { ContextConsumer, ContextProvider } from "./mainContext";
 import Results from "./pages/Results";
 import Search from "./pages/Search";
 import Favourites from "./pages/Favourites";
+import NetworkStatusMessage from "./shared/NetworkStatusMessage";
 
 const StyledHeader = styled.header`
    {
@@ -37,6 +38,7 @@ class App extends Component {
                     justify="center"
                   >
                     <Grid item xs={12}>
+                      <NetworkStatusMessage />
                       <StyledHeader>
                         <img src={Header} alt="header" />
                       </StyledHeader>
