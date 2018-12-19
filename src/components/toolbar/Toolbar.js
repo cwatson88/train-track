@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import PropTypes from "prop-types";
 import styled from "styled-components";
 import BottomNavigation from "@material-ui/core/BottomNavigation";
 import BottomNavigationAction from "@material-ui/core/BottomNavigationAction";
@@ -63,7 +62,5 @@ class Toolbar extends Component {
     );
   }
 }
-
-Toolbar.propTypes = {};
 
 export default Toolbar;

@@ -21,5 +21,4 @@ class FavouriteList extends Component {
   }
 }
 
-
 export default FavouriteList;
