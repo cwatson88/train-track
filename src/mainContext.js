@@ -1,6 +1,7 @@
 import React, { Component, createContext } from "react";
 import { getQuickestTrainServices, getTrainServices } from "./utils/apiCaller";
 import data from "./utils/datastub";
+import {db} from "./utils/firebaseInit";
 
 const MainContext = createContext();
 
@@ -57,9 +58,29 @@ class ContextProvider extends Component {
     getVirginTrains: () => this.getVirginTrains,
     changeRefreshRate: () => this.changeRefreshRate,
     refreshData: () => this.refreshData,
-    getTrains: () => this.getTrains
+    getTrains: () => this.getTrains,
+    readUserData: () => this.readUserData
   };
 
+  readUserData = () => {
+  //   db.collection("users").add({
+  //     first: "Ada",
+  //     last: "Lovelace",
+  //     born: 1815
+  // })
+  // .then(function(docRef) {
+  //     console.log("Document written with ID: ", docRef.id);
+  // })
+  // .catch(function(error) {
+  //     console.error("Error adding document: ", error);
+  // });
+  db.collection("users").get().then((querySnapshot) => {
+    querySnapshot.forEach((doc) => {
+        console.log(`${doc.id} => ${doc.data()}`);
+    });
+});
+
+  }
   updateStation = (stationType, stationDetails) => {
     const journey = { ...this.state.journey };
     journey[stationType] = stationDetails;

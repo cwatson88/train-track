@@ -37,6 +37,7 @@ class App extends Component {
                     className="App"
                     justify="center"
                   >
+                    {console.log(actions.readUserData())}
                     <Grid item xs={12}>
                       <NetworkStatusMessage />
                       <StyledHeader>
