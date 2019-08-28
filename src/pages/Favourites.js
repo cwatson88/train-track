@@ -8,6 +8,4 @@ class Favourites extends Component {
   }
 }
 
-Favourites.propTypes = {};
-
 export default Favourites;

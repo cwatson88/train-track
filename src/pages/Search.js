@@ -21,8 +21,4 @@ const Search = ({ styles }) => (
   </ContextConsumer>
 );
 
-Search.propTypes = {
-  styles: PropTypes.object
-};
-
 export default Search;

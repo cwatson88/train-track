@@ -1,5 +1,4 @@
-import Grid from "@material-ui/core/Grid";
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import styled from "styled-components";
 import Header from "./assets/Header.svg";
@@ -22,55 +21,36 @@ const StyledHeader = styled.header`
   }
 `;
 
-class App extends Component {
-  render() {
-    return (
-      <Router>
-        <Route
-          render={({ location, history }) => (
-            <ContextProvider>
-              <ContextConsumer>
-                {({ state: cxState, actions }) => (
-                  <Grid
-                    container
-                    style={{ textAlign: "center" }}
-                    className="App"
-                    justify="center"
-                  >
-                    {console.log(actions.readUserData())}
-                    <Grid item xs={12}>
-                      <NetworkStatusMessage />
-                      <StyledHeader>
-                        <img src={Header} alt="header" />
-                      </StyledHeader>
-                    </Grid>
-                    <Grid item xs={12} style={{ paddingBottom: "74px" }}>
-                      <Switch location={location}>
-                        <Route
-                          exact
-                          path="(/|/index.html)"
-                          render={props => <Search {...props} />}
-                        />
-                        <Route
-                          path="/:departureStation/to/:destinationStation"
-                          render={props => <Results {...props} />}
-                        />
-                        <Route
-                          path="/favourites"
-                          render={props => <Favourites {...props} />}
-                        />
-                      </Switch>
-                      <Toolbar location={location} history={history} />
-                    </Grid>
-                  </Grid>
-                )}
-              </ContextConsumer>
-            </ContextProvider>
-          )}
-        />
-      </Router>
-    );
-  }
-}
+const App = props => {
+  return (
+    <Router>
+      <Route
+        render={({ location, history }) => (
+          <ContextProvider>
+            <ContextConsumer>
+              {({ state: cxState, actions }) => (
+                <Fragment>
+                  <NetworkStatusMessage />
+                  <StyledHeader>
+                    <img src={Header} alt="header" />
+                  </StyledHeader>
+                  <Switch location={location}>
+                    <Route exact path="(/|/index.html)" component={Search} />
+                    <Route
+                      path="/:departureStation/to/:destinationStation"
+                      component={Results}
+                    />
+                    <Route path="/favourites" component={Favourites} />
+                  </Switch>
+                  <Toolbar location={location} history={history} />
+                </Fragment>
+              )}
+            </ContextConsumer>
+          </ContextProvider>
+        )}
+      />
+    </Router>
+  );
+};
 
 export default App;

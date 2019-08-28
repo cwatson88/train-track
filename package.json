@@ -3,21 +3,21 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@material-ui/core": "^1.5.1",
-    "@material-ui/icons": "^2.0.3",
-    "@sentry/browser": "4.0.4",
-    "axios": "^0.18.0",
-    "firebase": "^5.8.2",
-    "npm": "^6.7.0",
-    "react": "^16.8.1",
-    "react-dom": "^16.8.1",
-    "react-router-dom": "^4.3.1",
-    "react-scripts": "^2.1.4",
-    "react-spring": "^8.0.5",
-    "react-transition-group": "^2.5.3",
-    "source-map-explorer": "^1.6.0",
-    "styled-components": "^4.1.3",
-    "uuid": "^3.3.2"
+    "@material-ui/core": "^4.3.3",
+    "@material-ui/icons": "^4.2.1",
+    "@sentry/browser": "5.6.2",
+    "axios": "^0.19.0",
+    "firebase": "^6.4.2",
+    "npm": "^6.11.2",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "react-router-dom": "^5.0.1",
+    "react-scripts": "^3.1.1",
+    "react-spring": "^8.0.27",
+    "react-transition-group": "^4.2.2",
+    "source-map-explorer": "^2.0.1",
+    "styled-components": "^4.3.2",
+    "uuid": "^3.3.3"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -29,10 +29,11 @@
     "analyze": "source-map-explorer build/static/js/main.*"
   },
   "devDependencies": {
-    "eslint-plugin-prettier": "^3.0.1",
-    "eslint-plugin-react": "^7.12.4",
-    "prettier": "^1.16.4",
-    "react-testing-library": "^5.6.0"
+    "eslint-plugin-prettier": "^3.1.0",
+    "eslint-plugin-react": "^7.14.3",
+    "eslint-plugin-react-hooks": "^2.0.1",
+    "prettier": "^1.18.2",
+    "react-testing-library": "^8.0.1"
   },
   "browserslist": [
     ">0.2%",

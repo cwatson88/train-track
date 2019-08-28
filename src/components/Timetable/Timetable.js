@@ -1,38 +1,30 @@
 import React, { Fragment } from "react";
-import PropTypes from "prop-types";
 import { Grid } from "@material-ui/core";
 import Service from "./Service";
 import { useSprings, animated } from "react-spring";
+import { isArray } from "util";
 
-const Timetable = props => {
-  const {
-    journeyTimetable: { service }
-  } = props;
+const Timetable = ({ journeyTimetable }) => {
+  const servicesArray = Array.isArray(journeyTimetable.service)
+    ? journeyTimetable.service
+    : [journeyTimetable.service];
 
-  console.log(service);
+  // const springs = useSprings(
+  //   servicesArray.length,
+  //   servicesArray.map(item => ({ opacity: item.opacity }))
+  // );
 
-  const springs = useSprings(
-    service.length,
-    service.map(item => ({ opacity: item.opacity }))
+  return (
+    <Fragment>
+      {servicesArray.map(currentJourney => (
+        <Fragment key={currentJourney.rid}>
+          <Grid container justify="center">
+            <Service journey={currentJourney} />
+          </Grid>
+        </Fragment>
+      ))}
+    </Fragment>
   );
-
-  return springs.map(props => (
-    <Grid>
-      <animated.div style={props}>
-        {service.map(currentJourney => styles => (
-          <Fragment key={currentJourney.rid}>
-            <Grid container justify="center" style={styles}>
-              <Service journey={currentJourney} />
-            </Grid>
-          </Fragment>
-        ))}
-      </animated.div>
-    </Grid>
-  ));
-};
-
-Timetable.propTypes = {
-  currentJourney: PropTypes.array
 };
 
 export default Timetable;
